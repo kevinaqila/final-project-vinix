@@ -33,10 +33,11 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!authUser) {
+    const token = localStorage.getItem("token");
+    if (!authUser && token) {
       checkAuth();
     }
-  }, []);
+  }, []); 
 
   // Scroll to top on route change
   useEffect(() => {

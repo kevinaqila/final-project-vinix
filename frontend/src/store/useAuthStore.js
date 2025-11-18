@@ -32,12 +32,14 @@ export const useAuthStore = create((set, get) => ({
         set({ authUser: res.data.user });
         toast.success('Login berhasil!');
         
+        setTimeout(() => {
         if (res.data.user.role) {
-        window.location.href = '/dashboard';
+          window.location.href = '/dashboard'; 
         } else {
-        window.location.href = '/select-role';
+          window.location.href = '/select-role';
         }
-
+        }, 100);
+        
     } catch (error) {
       const msg = error.response?.data?.message || 'Email atau password salah.';
       toast.error(msg);
