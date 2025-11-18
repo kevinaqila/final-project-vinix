@@ -35,10 +35,9 @@ export const useAuthStore = create((set, get) => ({
         
         setTimeout(() => {
             
-        const { authUser } = get();
-
-        if (authUser?.role !== null) {
-          window.location.href = `/${authUser.role}/dashboard`; 
+const user = res.data.user;
+        if (user?.role !== null) {
+          window.location.href = `/${user.role}/dashboard`; 
         } else {
           window.location.href = '/select-role';
         }
