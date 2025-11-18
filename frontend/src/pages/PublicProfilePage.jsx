@@ -27,7 +27,7 @@ const PublicProfilePage = () => {
   const loadUserProfile = async () => {
     try {
       setLoading(true);
-      const res = await axiosInstance.get(`/user/profile/${userId}`);
+      const res = await axiosInstance.get(`/api/user/profile/${userId}`);
       setUser(res.data);
 
       // Load services if freelancer
@@ -93,10 +93,10 @@ const PublicProfilePage = () => {
                       alt={user.fullName}
                       className="h-full w-full object-cover"
                       onError={(e) => {
-                        console.log('Profile image load error:', user.profileImage);
-                        e.target.style.display = 'none';
-                        const fallback = e.target.parentElement.querySelector('.fallback-icon');
-                        if (fallback) fallback.style.display = 'flex';
+                        console.log("Profile image load error:", user.profileImage);
+                        e.target.style.display = "none";
+                        const fallback = e.target.parentElement.querySelector(".fallback-icon");
+                        if (fallback) fallback.style.display = "flex";
                       }}
                     />
                     <div className="fallback-icon hidden h-full w-full items-center justify-center">
@@ -437,10 +437,10 @@ const PublicProfilePage = () => {
                                 alt={review.clientId.fullName}
                                 className="h-full w-full object-cover"
                                 onError={(e) => {
-                                  console.log('Profile image load error:', review.clientId.profileImage);
-                                  e.target.style.display = 'none';
-                                  const fallback = e.target.parentElement.querySelector('.fallback-icon');
-                                  if (fallback) fallback.style.display = 'flex';
+                                  console.log("Profile image load error:", review.clientId.profileImage);
+                                  e.target.style.display = "none";
+                                  const fallback = e.target.parentElement.querySelector(".fallback-icon");
+                                  if (fallback) fallback.style.display = "flex";
                                 }}
                               />
                               <div className="fallback-icon hidden h-full w-full items-center justify-center">

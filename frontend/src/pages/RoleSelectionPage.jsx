@@ -5,7 +5,7 @@ import { Briefcase, UserCircle } from "lucide-react";
 
 const RoleSelectionPage = () => {
   const navigate = useNavigate();
-  const { selectRole } = useAuthStore();
+  const { selectRole, authUser } = useAuthStore();
   const [selectedRole, setSelectedRole] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -19,7 +19,11 @@ const RoleSelectionPage = () => {
       if (role === "client") {
         navigate("/client/dashboard");
       } else if (role === "freelancer") {
-        navigate("/freelancer/onboarding");
+        if (authUser?.freelancerProfile) {
+          navigate("/freelancer/dashboard"); // ✅ Skip onboarding if exists
+        } else {
+          navigate("/freelancer/onboarding"); // ✅ Only if no profile
+        }
       }
     } catch (error) {
       console.error("Error selecting role:", error);

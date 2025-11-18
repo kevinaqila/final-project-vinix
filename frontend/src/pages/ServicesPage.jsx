@@ -191,10 +191,10 @@ const ServicesPage = () => {
                               alt={service.freelancerId?.fullName}
                               className="h-full w-full object-cover"
                               onError={(e) => {
-                                console.log('Profile image load error:', service.freelancerId.profileImage);
-                                e.target.style.display = 'none';
-                                const fallback = e.target.parentElement.querySelector('.fallback-icon');
-                                if (fallback) fallback.style.display = 'flex';
+                                console.log("Profile image load error:", service.freelancerId.profileImage);
+                                e.target.style.display = "none";
+                                const fallback = e.target.parentElement.querySelector(".fallback-icon");
+                                if (fallback) fallback.style.display = "flex";
                               }}
                             />
                             <div className="fallback-icon hidden h-full w-full items-center justify-center">
