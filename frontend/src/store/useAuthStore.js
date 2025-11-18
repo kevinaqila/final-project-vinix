@@ -28,8 +28,12 @@ export const useAuthStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post('/api/auth/login', data);
       localStorage.setItem('token', res.data.token);
-      await get().checkAuth();
-      toast.success('Login berhasil!');
+    await get().checkAuth();
+if (res.data.user.role) {
+      window.location.href = '/dashboard';
+    } else {
+      window.location.href = '/select-role';
+    }      toast.success('Login berhasil!');
     } catch (error) {
       const msg = error.response?.data?.message || 'Email atau password salah.';
       toast.error(msg);
