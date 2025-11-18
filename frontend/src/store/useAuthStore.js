@@ -32,12 +32,12 @@ export const useAuthStore = create((set, get) => ({
                 
         set({ authUser: res.data.user });
         toast.success('Login berhasil!');
+
+        const role = res.data.user.role;
         
         setTimeout(() => {
-            
-const user = res.data.user;
-        if (user?.role !== null) {
-          window.location.href = `/${user.role}/dashboard`; 
+        if (role !== null) {
+          window.location.href = `/${role}/dashboard`; 
         } else {
           window.location.href = '/select-role';
         }
