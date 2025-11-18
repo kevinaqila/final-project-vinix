@@ -27,13 +27,16 @@ export const useAuthStore = create((set, get) => ({
     set({ isLoggingIn: true });
     try {
       const res = await axiosInstance.post('/api/auth/login', data);
-      localStorage.setItem('token', res.data.token);
-    await get().checkAuth();
-if (res.data.user.role) {
-      window.location.href = '/dashboard';
+        localStorage.setItem('token', res.data.token);
+        
+        toast.success('Login berhasil!');
+        
+        if (res.data.user.role) {
+        window.location.href = '/dashboard';
     } else {
       window.location.href = '/select-role';
-    }      toast.success('Login berhasil!');
+        }
+
     } catch (error) {
       const msg = error.response?.data?.message || 'Email atau password salah.';
       toast.error(msg);
@@ -60,10 +63,11 @@ if (res.data.user.role) {
       const res = await axiosInstance.get('/api/auth/verify');
       set({ authUser: res.data.user });
     } catch (error) {
+            console.error('Auth check error:', error);
+
       set({ authUser: null });
-      if (error.response?.status === 401 || error.response?.status === 403) {
-        localStorage.removeItem('token');
-      }
+          localStorage.removeItem('token');
+
     } finally {
       set({ isCheckingAuth: false });
     }
