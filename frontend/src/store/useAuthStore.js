@@ -27,17 +27,22 @@ export const useAuthStore = create((set, get) => ({
     set({ isLoggingIn: true });
     try {
         const res = await axiosInstance.post('/api/auth/login', data);
+
+        const user = res.data?.user;
+        if (!user) {
+          throw new Error('User data is missing in the response');
+        }
         
         localStorage.setItem('token', res.data.token);
                 
         set({ authUser: res.data.user });
         toast.success('Login berhasil!');
 
-        const role = res.data.user.role;
         
         setTimeout(() => {
-        if (role !== null) {
-          window.location.href = `/${role}/dashboard`; 
+            const userRole = user.role;
+        if (userRole && userRole !== '' && userRole !== null) {
+          window.location.href = `/${userRole}/dashboard`; 
         } else {
           window.location.href = '/select-role';
         }
