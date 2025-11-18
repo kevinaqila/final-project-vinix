@@ -214,18 +214,27 @@ const MessagesPage = () => {
                             <div className="relative">
                               <div className="h-14 w-14 rounded-2xl overflow-hidden bg-gray-200 shrink-0 shadow-lg">
                                 {otherUser?.profileImage ? (
-                                  <img
-                                    src={`${otherUser.profileImage}?t=${Date.now()}`}
-                                    alt={otherUser.fullName}
-                                    className="h-full w-full object-cover"
-                                    onError={(e) => {
-                                      console.log('Profile image load error:', otherUser.profileImage);
-                                      e.target.style.display = 'none';
-                                      e.target.nextSibling.style.display = 'flex';
-                                    }}
-                                  />
-                                ) : null}
-                                {!otherUser?.profileImage && (
+                                  <>
+                                    <img
+                                      src={`${otherUser.profileImage}?t=${Date.now()}`}
+                                      alt={otherUser.fullName}
+                                      className="h-full w-full object-cover"
+                                      onError={(e) => {
+                                        console.log('Profile image load error:', otherUser.profileImage);
+                                        e.target.style.display = 'none';
+                                        const fallback = e.target.parentElement.querySelector('.fallback-icon');
+                                        if (fallback) fallback.style.display = 'flex';
+                                      }}
+                                    />
+                                    <div className="fallback-icon hidden h-full w-full items-center justify-center">
+                                      <img
+                                        src="/images/avatar.png"
+                                        alt={otherUser.fullName}
+                                        className="h-full w-full object-cover"
+                                      />
+                                    </div>
+                                  </>
+                                ) : (
                                   <img
                                     src="/images/avatar.png"
                                     alt={otherUser.fullName}
@@ -300,31 +309,42 @@ const MessagesPage = () => {
                               ? selectedConversation.order.freelancerId
                               : selectedConversation.order.clientId
                             )?.profileImage ? (
-                              <img
-                                src={`${
-                                  (authUser._id === selectedConversation.order.clientId._id
-                                    ? selectedConversation.order.freelancerId
-                                    : selectedConversation.order.clientId
-                                  ).profileImage
-                                }?t=${Date.now()}`}
-                                alt={
-                                  (authUser._id === selectedConversation.order.clientId._id
-                                    ? selectedConversation.order.freelancerId
-                                    : selectedConversation.order.clientId
-                                  ).fullName
-                                }
-                                className="h-full w-full object-cover"
-                                onError={(e) => {
-                                  console.log('Profile image load error');
-                                  e.target.style.display = 'none';
-                                  e.target.nextSibling.style.display = 'flex';
-                                }}
-                              />
-                            ) : null}
-                            {!(authUser._id === selectedConversation.order.clientId._id
-                              ? selectedConversation.order.freelancerId
-                              : selectedConversation.order.clientId
-                            )?.profileImage && (
+                              <>
+                                <img
+                                  src={`${
+                                    (authUser._id === selectedConversation.order.clientId._id
+                                      ? selectedConversation.order.freelancerId
+                                      : selectedConversation.order.clientId
+                                    ).profileImage
+                                  }?t=${Date.now()}`}
+                                  alt={
+                                    (authUser._id === selectedConversation.order.clientId._id
+                                      ? selectedConversation.order.freelancerId
+                                      : selectedConversation.order.clientId
+                                    ).fullName
+                                  }
+                                  className="h-full w-full object-cover"
+                                  onError={(e) => {
+                                    console.log('Profile image load error');
+                                    e.target.style.display = 'none';
+                                    const fallback = e.target.parentElement.querySelector('.fallback-icon');
+                                    if (fallback) fallback.style.display = 'flex';
+                                  }}
+                                />
+                                <div className="fallback-icon hidden h-full w-full items-center justify-center">
+                                  <img
+                                    src="/images/avatar.png"
+                                    alt={
+                                      (authUser._id === selectedConversation.order.clientId._id
+                                        ? selectedConversation.order.freelancerId
+                                        : selectedConversation.order.clientId
+                                      ).fullName
+                                    }
+                                    className="h-full w-full object-cover"
+                                  />
+                                </div>
+                              </>
+                            ) : (
                               <img
                                 src="/images/avatar.png"
                                 alt={

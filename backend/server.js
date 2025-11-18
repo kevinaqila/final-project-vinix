@@ -35,9 +35,9 @@ const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
     ? ['https://final-project-vinix7.vercel.app', 'https://vinix-backend.vercel.app']
     : 'http://localhost:5173',
-  credentials: false,
+  credentials: true, // ✅ Enable credentials for auth
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'], // ✅ Add more headers
   optionsSuccessStatus: 200
 };
 

@@ -223,18 +223,23 @@ const ProfilePage = () => {
                   <div className="relative">
                     <div className="h-24 w-24 bg-white rounded-2xl flex items-center justify-center overflow-hidden shadow-2xl">
                       {authUser?.profileImage ? (
-                        <img
-                          src={`${authUser.profileImage}?t=${Date.now()}`}
-                          alt={authUser.fullName}
-                          className="h-full w-full object-cover"
-                          onError={(e) => {
-                            console.log('Profile image load error:', authUser.profileImage);
-                            e.target.style.display = 'none';
-                            e.target.nextSibling.style.display = 'flex';
-                          }}
-                        />
-                      ) : null}
-                      {!authUser?.profileImage && (
+                        <>
+                          <img
+                            src={`${authUser.profileImage}?t=${Date.now()}`}
+                            alt={authUser.fullName}
+                            className="h-full w-full object-cover"
+                            onError={(e) => {
+                              console.log('Profile image load error:', authUser.profileImage);
+                              e.target.style.display = 'none';
+                              const fallback = e.target.parentElement.querySelector('.fallback-icon');
+                              if (fallback) fallback.style.display = 'flex';
+                            }}
+                          />
+                          <div className="fallback-icon hidden h-full w-full items-center justify-center">
+                            <UserIcon className="h-12 w-12 text-green-600" />
+                          </div>
+                        </>
+                      ) : (
                         <UserIcon className="h-12 w-12 text-green-600" />
                       )}
                     </div>
