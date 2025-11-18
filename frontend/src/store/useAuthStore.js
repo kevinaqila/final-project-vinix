@@ -77,6 +77,12 @@ export const useAuthStore = create((set, get) => ({
     return res.data;
   },
 
+  updateFreelancerProfile: async (profileData) => {
+    const res = await axiosInstance.put('/user/freelancer-profile', profileData);
+    set({ authUser: res.data.user });
+    return res.data;
+  },
+
   uploadProfilePhoto: async (file) => {
     try {
       const formData = new FormData();

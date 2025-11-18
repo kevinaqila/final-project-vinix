@@ -8,8 +8,8 @@ const FreelancerOnboardingPage = () => {
   const { updateFreelancerProfile } = useAuthStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    education: "",
-    skills: "",
+    education: [""],
+    skills: [""],
     bio: "",
     certifications: [{ name: "", issuer: "", year: "" }],
     experience: [{ title: "", company: "", duration: "", description: "" }],
@@ -31,6 +31,42 @@ const FreelancerOnboardingPage = () => {
     const newCerts = [...formData.certifications];
     newCerts[index][field] = value;
     setFormData({ ...formData, certifications: newCerts });
+  };
+
+  const handleAddSkill = () => {
+    setFormData({
+      ...formData,
+      skills: [...formData.skills, ""],
+    });
+  };
+
+  const handleRemoveSkill = (index) => {
+    const newSkills = formData.skills.filter((_, i) => i !== index);
+    setFormData({ ...formData, skills: newSkills });
+  };
+
+  const handleSkillChange = (index, value) => {
+    const newSkills = [...formData.skills];
+    newSkills[index] = value;
+    setFormData({ ...formData, skills: newSkills });
+  };
+
+  const handleAddEducation = () => {
+    setFormData({
+      ...formData,
+      education: [...formData.education, ""],
+    });
+  };
+
+  const handleRemoveEducation = (index) => {
+    const newEducation = formData.education.filter((_, i) => i !== index);
+    setFormData({ ...formData, education: newEducation });
+  };
+
+  const handleEducationChange = (index, value) => {
+    const newEducation = [...formData.education];
+    newEducation[index] = value;
+    setFormData({ ...formData, education: newEducation });
   };
 
   const handleAddExperience = () => {
@@ -89,14 +125,36 @@ const FreelancerOnboardingPage = () => {
                 <BookOpen className="inline h-5 w-5 mr-2 text-green-600" />
                 Pendidikan <span className="text-red-500">*</span>
               </label>
-              <input
-                type="text"
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600"
-                placeholder="Contoh: S1 Akuntansi - Universitas Indonesia"
-                value={formData.education}
-                onChange={(e) => setFormData({ ...formData, education: e.target.value })}
-              />
+              <div className="space-y-3">
+                {formData.education.map((edu, index) => (
+                  <div key={index} className="flex gap-2">
+                    <input
+                      type="text"
+                      required
+                      className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600"
+                      placeholder={`Pendidikan ${index + 1} (Contoh: S1 Akuntansi - Universitas Indonesia)`}
+                      value={edu}
+                      onChange={(e) => handleEducationChange(index, e.target.value)}
+                    />
+                    {formData.education.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveEducation(index)}
+                        className="px-3 py-2 text-red-600 hover:text-red-700 border border-red-300 rounded-md hover:bg-red-50"
+                      >
+                        Hapus
+                      </button>
+                    )}
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={handleAddEducation}
+                  className="text-green-600 hover:text-green-700 font-medium flex items-center gap-1"
+                >
+                  + Tambah Pendidikan
+                </button>
+              </div>
             </div>
 
             {/* Skills - Required */}
@@ -105,14 +163,36 @@ const FreelancerOnboardingPage = () => {
                 <Award className="inline h-5 w-5 mr-2 text-green-600" />
                 Keahlian <span className="text-red-500">*</span>
               </label>
-              <textarea
-                required
-                rows="3"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600"
-                placeholder="Contoh: Laporan Keuangan, Konsultasi Pajak & Pembukuan, Audit Internal"
-                value={formData.skills}
-                onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
-              />
+              <div className="space-y-3">
+                {formData.skills.map((skill, index) => (
+                  <div key={index} className="flex gap-2">
+                    <input
+                      type="text"
+                      required
+                      className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600"
+                      placeholder={`Keahlian ${index + 1} (Contoh: Laporan Keuangan)`}
+                      value={skill}
+                      onChange={(e) => handleSkillChange(index, e.target.value)}
+                    />
+                    {formData.skills.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveSkill(index)}
+                        className="px-3 py-2 text-red-600 hover:text-red-700 border border-red-300 rounded-md hover:bg-red-50"
+                      >
+                        Hapus
+                      </button>
+                    )}
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={handleAddSkill}
+                  className="text-green-600 hover:text-green-700 font-medium flex items-center gap-1"
+                >
+                  + Tambah Keahlian
+                </button>
+              </div>
             </div>
 
             {/* Bio - Required */}
