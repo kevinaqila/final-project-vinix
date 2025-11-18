@@ -17,12 +17,16 @@ const RoleSelectionPage = () => {
       await selectRole(role);
 
       if (role === "client") {
-        navigate("/client/dashboard");
+        if (authUser?.isProfileComplete) {
+          navigate("/client/dashboard"); // ✅ Sudah isi profile
+        } else {
+          navigate("/client/onboarding"); // ✅ Belum isi, ke onboarding
+        }
       } else if (role === "freelancer") {
         if (authUser?.isProfileComplete) {
-          navigate("/freelancer/dashboard"); // ✅ Skip onboarding if exists
+          navigate("/freelancer/dashboard");
         } else {
-          navigate("/freelancer/onboarding"); // ✅ Only if no profile
+          navigate("/freelancer/onboarding");
         }
       }
     } catch (error) {

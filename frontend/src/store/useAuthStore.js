@@ -108,6 +108,19 @@ export const useAuthStore = create((set, get) => ({
     return res.data;
   },
 
+  updateClientProfile: async (data) => {
+    try {
+      const res = await axiosInstance.put("/api/user/client-profile", data);
+      set({ authUser: res.data.user });
+      toast.success("Profil client berhasil diperbarui!");
+      return res.data;
+    } catch (error) {
+      const msg = error.response?.data?.message || "Gagal memperbarui profil client";
+      toast.error(msg);
+      throw error;
+    }
+  },
+
   uploadProfilePhoto: async (file) => {
     try {
       const formData = new FormData();

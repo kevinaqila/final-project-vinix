@@ -26,6 +26,7 @@ import MessagesPage from "./pages/MessagesPage";
 import ProtectedRoute, { FreelancerRoute, ClientRoute } from "./components/ProtectedRoute";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { useAuthStore } from "./store/useAuthStore";
+import ClientOnboardingPage from "./pages/ClientOnboardingPage";
 
 const App = () => {
   const { checkAuth, authUser } = useAuthStore();
@@ -37,7 +38,7 @@ const App = () => {
     if (!authUser && token) {
       checkAuth();
     }
-  }, []); 
+  }, []);
 
   // Scroll to top on route change
   useEffect(() => {
@@ -101,6 +102,7 @@ const App = () => {
 
             {/* Client Only Routes */}
             <Route element={<ClientRoute />}>
+              <Route path="/client/onboarding" element={<ClientOnboardingPage />} />
               <Route path="/client/dashboard" element={<ClientDashboard />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/services/:id" element={<ServiceDetailPage />} />
