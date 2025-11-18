@@ -215,11 +215,17 @@ const MessagesPage = () => {
                               <div className="h-14 w-14 rounded-2xl overflow-hidden bg-gray-200 shrink-0 shadow-lg">
                                 {otherUser?.profileImage ? (
                                   <img
-                                    src={`http://localhost:5050${otherUser.profileImage}`}
+                                    src={`${otherUser.profileImage}?t=${Date.now()}`}
                                     alt={otherUser.fullName}
                                     className="h-full w-full object-cover"
+                                    onError={(e) => {
+                                      console.log('Profile image load error:', otherUser.profileImage);
+                                      e.target.style.display = 'none';
+                                      e.target.nextSibling.style.display = 'flex';
+                                    }}
                                   />
-                                ) : (
+                                ) : null}
+                                {!otherUser?.profileImage && (
                                   <img
                                     src="/images/avatar.png"
                                     alt={otherUser.fullName}
@@ -295,12 +301,12 @@ const MessagesPage = () => {
                               : selectedConversation.order.clientId
                             )?.profileImage ? (
                               <img
-                                src={`http://localhost:5050${
+                                src={`${
                                   (authUser._id === selectedConversation.order.clientId._id
                                     ? selectedConversation.order.freelancerId
                                     : selectedConversation.order.clientId
                                   ).profileImage
-                                }`}
+                                }?t=${Date.now()}`}
                                 alt={
                                   (authUser._id === selectedConversation.order.clientId._id
                                     ? selectedConversation.order.freelancerId
@@ -308,8 +314,17 @@ const MessagesPage = () => {
                                   ).fullName
                                 }
                                 className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  console.log('Profile image load error');
+                                  e.target.style.display = 'none';
+                                  e.target.nextSibling.style.display = 'flex';
+                                }}
                               />
-                            ) : (
+                            ) : null}
+                            {!(authUser._id === selectedConversation.order.clientId._id
+                              ? selectedConversation.order.freelancerId
+                              : selectedConversation.order.clientId
+                            )?.profileImage && (
                               <img
                                 src="/images/avatar.png"
                                 alt={

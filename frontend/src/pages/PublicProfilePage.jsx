@@ -88,11 +88,17 @@ const PublicProfilePage = () => {
               <div className="h-24 w-24 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden">
                 {user.profileImage ? (
                   <img
-                    src={`http://localhost:5050${user.profileImage}`}
+                    src={`${user.profileImage}?t=${Date.now()}`}
                     alt={user.fullName}
                     className="h-full w-full object-cover"
+                    onError={(e) => {
+                      console.log('Profile image load error:', user.profileImage);
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
                   />
-                ) : (
+                ) : null}
+                {!user.profileImage && (
                   <User className="h-12 w-12 text-green-600" />
                 )}
               </div>
@@ -421,11 +427,17 @@ const PublicProfilePage = () => {
                         <div className="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden shrink-0">
                           {review.clientId.profileImage ? (
                             <img
-                              src={`http://localhost:5050${review.clientId.profileImage}`}
+                              src={`${review.clientId.profileImage}?t=${Date.now()}`}
                               alt={review.clientId.fullName}
                               className="h-full w-full object-cover"
+                              onError={(e) => {
+                                console.log('Profile image load error:', review.clientId.profileImage);
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'flex';
+                              }}
                             />
-                          ) : (
+                          ) : null}
+                          {!review.clientId.profileImage && (
                             <User className="h-5 w-5 text-gray-600" />
                           )}
                         </div>

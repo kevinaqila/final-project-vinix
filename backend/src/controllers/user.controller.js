@@ -5,11 +5,11 @@ export const selectRole = async (req, res) => {
     const { role } = req.body;
     const userId = req.user._id;
 
-    if (!role || !['client', 'freelancer'].includes(role)) {
+    if (!role || !["client", "freelancer"].includes(role)) {
       return res.status(400).json({ message: "Invalid role" });
     }
 
-    const user = await User.findByIdAndUpdate(userId, { role }, { new: true }).select('-password');
+    const user = await User.findByIdAndUpdate(userId, { role }, { new: true }).select("-password");
 
     res.status(200).json({
       message: "Role selected successfully",
@@ -42,7 +42,7 @@ export const updateFreelancerProfile = async (req, res) => {
         isProfileComplete: true,
       },
       { new: true }
-    ).select('-password');
+    ).select("-password");
 
     res.status(200).json({
       message: "Freelancer profile updated successfully",
@@ -66,7 +66,7 @@ export const updateClientProfile = async (req, res) => {
         isProfileComplete: true,
       },
       { new: true }
-    ).select('-password');
+    ).select("-password");
 
     res.status(200).json({
       message: "Client profile updated successfully",
@@ -99,31 +99,31 @@ export const updateProfile = async (req, res) => {
     if (experience !== undefined) {
       if (Array.isArray(experience)) {
         updateData.experience = experience.map((exp) => {
-          if (typeof exp === 'string') {
+          if (typeof exp === "string") {
             return {
               title: exp,
-              company: '',
-              duration: '',
-              description: '',
+              company: "",
+              duration: "",
+              description: "",
             };
-          } else if (typeof exp === 'object' && exp !== null) {
+          } else if (typeof exp === "object" && exp !== null) {
             return {
               title: exp.title || exp,
-              company: exp.company || '',
-              duration: exp.duration || '',
-              description: exp.description || '',
+              company: exp.company || "",
+              duration: exp.duration || "",
+              description: exp.description || "",
             };
           }
           return exp;
         });
-      } else if (typeof experience === 'string') {
+      } else if (typeof experience === "string") {
         updateData.experience = experience.trim()
           ? [
               {
                 title: experience.trim(),
-                company: '',
-                duration: '',
-                description: '',
+                company: "",
+                duration: "",
+                description: "",
               },
             ]
           : [];
@@ -133,9 +133,9 @@ export const updateProfile = async (req, res) => {
     }
 
     if (skills !== undefined) {
-      if (typeof skills === 'string') {
+      if (typeof skills === "string") {
         updateData.skills = skills
-          .split(',')
+          .split(",")
           .map((s) => s.trim())
           .filter((s) => s);
       } else if (Array.isArray(skills)) {
@@ -146,9 +146,9 @@ export const updateProfile = async (req, res) => {
     }
 
     if (education !== undefined) {
-      if (typeof education === 'string') {
+      if (typeof education === "string") {
         updateData.education = education
-          .split(',')
+          .split(",")
           .map((e) => e.trim())
           .filter((e) => e);
       } else if (Array.isArray(education)) {
@@ -158,7 +158,7 @@ export const updateProfile = async (req, res) => {
       }
     }
 
-    const user = await User.findByIdAndUpdate(userId, updateData, { new: true }).select('-password');
+    const user = await User.findByIdAndUpdate(userId, updateData, { new: true }).select("-password");
 
     res.status(200).json({
       message: "Profile updated successfully",
@@ -173,7 +173,7 @@ export const getProfile = async (req, res) => {
   try {
     const userId = req.user._id;
 
-    const user = await User.findById(userId).select('-password');
+    const user = await User.findById(userId).select("-password");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -189,7 +189,7 @@ export const getPublicProfile = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    const user = await User.findById(userId).select('-password -wallet');
+    const user = await User.findById(userId).select("-password -wallet");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -210,15 +210,14 @@ export const uploadProfilePhoto = async (req, res) => {
     }
 
     // Use Cloudinary URL in production, local path in development
-    const profileImagePath = process.env.NODE_ENV === 'production'
-      ? req.file.path // Cloudinary URL
-      : `/uploads/${req.file.filename}`;
+    const profileImagePath =
+      process.env.NODE_ENV === "production"
+        ? req.file.path // Cloudinary URL
+        : `/uploads/${req.file.filename}`;
 
-    const user = await User.findByIdAndUpdate(
-      userId,
-      { profileImage: profileImagePath },
-      { new: true }
-    ).select('-password');
+    const user = await User.findByIdAndUpdate(userId, { profileImage: profileImagePath }, { new: true }).select(
+      "-password"
+    );
 
     res.status(200).json({
       message: "Profile photo uploaded successfully",

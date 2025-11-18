@@ -113,11 +113,17 @@ const ServiceDetailPage = () => {
                 <div className="h-12 w-12 rounded-xl overflow-hidden bg-gray-200 ring-2 ring-white/30 group-hover:ring-white/50 transition-all">
                   {service.freelancerId?.profileImage ? (
                     <img
-                      src={`http://localhost:5050${service.freelancerId.profileImage}`}
+                      src={`${service.freelancerId.profileImage}?t=${Date.now()}`}
                       alt={service.freelancerId.fullName}
                       className="h-full w-full object-cover"
+                      onError={(e) => {
+                        console.log('Profile image load error:', service.freelancerId.profileImage);
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
                     />
-                  ) : (
+                  ) : null}
+                  {!service.freelancerId?.profileImage && (
                     <img
                       src="/images/avatar.png"
                       alt={service.freelancerId.fullName}
@@ -198,11 +204,17 @@ const ServiceDetailPage = () => {
                           <div className="h-12 w-12 rounded-xl overflow-hidden bg-gray-200 shrink-0 shadow-lg">
                             {review.clientId?.profileImage ? (
                               <img
-                                src={`http://localhost:5050${review.clientId.profileImage}`}
+                                src={`${review.clientId.profileImage}?t=${Date.now()}`}
                                 alt={review.clientId.fullName}
                                 className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  console.log('Profile image load error:', review.clientId.profileImage);
+                                  e.target.style.display = 'none';
+                                  e.target.nextSibling.style.display = 'flex';
+                                }}
                               />
-                            ) : (
+                            ) : null}
+                            {!review.clientId?.profileImage && (
                               <img
                                 src="/images/avatar.png"
                                 alt={review.clientId.fullName}
