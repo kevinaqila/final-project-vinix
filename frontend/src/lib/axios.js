@@ -16,13 +16,6 @@ export const axiosInstance = axios.create({
   },
 });
 
-axiosInstance.interceptors.request.use((config) => {
-  if (config.url.startsWith('/')) {
-    config.url = config.url.substring(1);
-  }
-  return config;
-});
-
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
