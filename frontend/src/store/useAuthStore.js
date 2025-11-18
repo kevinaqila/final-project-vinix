@@ -30,6 +30,7 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('token', res.data.token);
         
         toast.success('Login berhasil!');
+        set({ authUser: res.data.user });
         
         if (res.data.user.role) {
         window.location.href = '/dashboard';
