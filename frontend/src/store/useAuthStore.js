@@ -74,9 +74,16 @@ export const useAuthStore = create((set, get) => ({
   },
 
   selectRole: async (role) => {
-    const res = await axiosInstance.put('/api/user/select-role', { role });
-    set({ authUser: res.data.user });
-    return res.data;
+   try {
+      const res = await axiosInstance.put('/api/user/select-role', { role });
+      set({ authUser: res.data.user });
+      toast.success('Role berhasil dipilih!');
+      return res.data;
+    } catch (error) {
+      const msg = error.response?.data?.message || 'Gagal memilih role';
+      toast.error(msg);
+      throw error;
+    }
   },
 
   updateProfile: async (profileData) => {

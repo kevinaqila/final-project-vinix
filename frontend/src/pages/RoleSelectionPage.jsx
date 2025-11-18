@@ -21,7 +21,10 @@ const RoleSelectionPage = () => {
       } else if (role === "freelancer") {
         navigate("/freelancer/onboarding");
       }
-    } catch {
+    } catch (error) {
+      console.error("Error selecting role:", error);
+      setSelectedRole(null);
+    } finally {
       setIsSubmitting(false);
     }
   };
