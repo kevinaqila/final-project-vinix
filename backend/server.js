@@ -44,7 +44,6 @@ const corsOptions = {
 // Middleware
 app.use(express.json());
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 app.use('/uploads', express.static('uploads'));
 
 // Routes

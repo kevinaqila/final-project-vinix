@@ -11,7 +11,7 @@ export const useAuthStore = create((set, get) => ({
   signup: async (data) => {
     set({ isSigningUp: true });
     try {
-      const res = await axiosInstance.post('/api/auth/signup', data);
+      const res = await axiosInstance.post('/auth/signup', data);
       localStorage.setItem('token', res.data.token);
       await get().checkAuth();
       toast.success('Akun berhasil dibuat!');
@@ -26,7 +26,7 @@ export const useAuthStore = create((set, get) => ({
   login: async (data) => {
     set({ isLoggingIn: true });
     try {
-      const res = await axiosInstance.post('/api/auth/login', data);
+      const res = await axiosInstance.post('/auth/login', data);
       localStorage.setItem('token', res.data.token);
       await get().checkAuth();
       toast.success('Login berhasil!');
