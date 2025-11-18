@@ -209,7 +209,10 @@ export const uploadProfilePhoto = async (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-    const profileImagePath = `/uploads/${req.file.filename}`;
+    // Use Cloudinary URL in production, local path in development
+    const profileImagePath = process.env.NODE_ENV === 'production'
+      ? req.file.path // Cloudinary URL
+      : `/uploads/${req.file.filename}`;
 
     const user = await User.findByIdAndUpdate(
       userId,
