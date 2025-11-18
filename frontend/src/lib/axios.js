@@ -5,10 +5,22 @@ let lastToastTime = 0;
 const TOAST_COOLDOWN = 3000;
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050';
+const cleanBaseURL = API_BASE_URL.replace(/\/+$/, '');
 
 export const axiosInstance = axios.create({
-  baseURL: `${API_BASE_URL}/api`,
+  baseURL: cleanBaseURL,
   timeout: 10000,
+  withCredentials: false,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+axiosInstance.interceptors.request.use((config) => {
+  if (config.url.startsWith('/')) {
+    config.url = config.url.substring(1);
+  }
+  return config;
 });
 
 axiosInstance.interceptors.request.use(

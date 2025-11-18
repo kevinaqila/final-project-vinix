@@ -21,7 +21,7 @@ const server = createServer(app);
 const io = new Server(server, {
   cors: {
     origin: process.env.NODE_ENV === 'production'
-      ? ['https://vinix-frontend.vercel.app', 'https://vinix.vercel.app']
+      ? ['https://final-project-vinix7.vercel.app', 'https://vinix-backend.vercel.app']
       : 'http://localhost:5173',
     methods: ['GET', 'POST']
   }
@@ -30,13 +30,21 @@ const io = new Server(server, {
 // Connect to database
 connectDB();
 
+// CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://final-project-vinix7.vercel.app', 'https://vinix-backend.vercel.app']
+    : 'http://localhost:5173',
+  credentials: false,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  optionsSuccessStatus: 200
+};
+
 // Middleware
 app.use(express.json());
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? ['https://vinix-frontend.vercel.app', 'https://vinix.vercel.app']
-    : 'http://localhost:5173'
-}));
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use('/uploads', express.static('uploads'));
 
 // Routes
