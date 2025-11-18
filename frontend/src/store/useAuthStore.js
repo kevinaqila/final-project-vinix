@@ -26,14 +26,18 @@ export const useAuthStore = create((set, get) => ({
   login: async (data) => {
     set({ isLoggingIn: true });
     try {
-      const res = await axiosInstance.post('/api/auth/login', data);
+        const res = await axiosInstance.post('/api/auth/login', data);
+        
         localStorage.setItem('token', res.data.token);
                 
         set({ authUser: res.data.user });
         toast.success('Login berhasil!');
         
         setTimeout(() => {
-        if (res.data.user.role) {
+            
+        const { authUser } = get();
+
+        if (authUser?.role) {
           window.location.href = '/dashboard'; 
         } else {
           window.location.href = '/select-role';
