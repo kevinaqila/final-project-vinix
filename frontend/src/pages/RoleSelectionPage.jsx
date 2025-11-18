@@ -19,7 +19,7 @@ const RoleSelectionPage = () => {
       if (role === "client") {
         navigate("/client/dashboard");
       } else if (role === "freelancer") {
-        if (authUser?.freelancerProfile) {
+        if (authUser?.profileData) {
           navigate("/freelancer/dashboard"); // ✅ Skip onboarding if exists
         } else {
           navigate("/freelancer/onboarding"); // ✅ Only if no profile
