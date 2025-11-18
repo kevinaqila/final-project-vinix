@@ -9,7 +9,7 @@ export const useReviewStore = create((set, get) => ({
   createReview: async (reviewData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.post('/reviews', reviewData);
+      const res = await axiosInstance.post('/api/reviews', reviewData);
       set({ isLoading: false });
       return res.data;
     } catch (error) {
@@ -21,7 +21,7 @@ export const useReviewStore = create((set, get) => ({
   fetchServiceReviews: async (serviceId) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.get(`/reviews/service/${serviceId}`);
+      const res = await axiosInstance.get(`/api/reviews/service/${serviceId}`);
       set({ reviews: res.data.reviews, isLoading: false });
       return res.data;
     } catch (error) {
@@ -33,7 +33,7 @@ export const useReviewStore = create((set, get) => ({
   fetchReviewsByFreelancer: async (freelancerId) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.get(`/reviews/freelancer/${freelancerId}`);
+      const res = await axiosInstance.get(`/api/reviews/freelancer/${freelancerId}`);
       set({ reviews: res.data.reviews, isLoading: false });
       return res.data;
     } catch (error) {
@@ -45,7 +45,7 @@ export const useReviewStore = create((set, get) => ({
   respondToReview: async (reviewId, response) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.put(`/reviews/${reviewId}/respond`, { response });
+      const res = await axiosInstance.put(`/api/reviews/${reviewId}/respond`, { response });
       set({
         reviews: get().reviews.map((r) => (r._id === reviewId ? res.data.review : r)),
         isLoading: false,

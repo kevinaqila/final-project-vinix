@@ -53,7 +53,7 @@ export const useAuthStore = create((set, get) => ({
         return;
       }
 
-      const res = await axiosInstance.get('/auth/verify');
+      const res = await axiosInstance.get('/api/auth/verify');
       set({ authUser: res.data.user });
     } catch (error) {
       set({ authUser: null });
@@ -66,19 +66,19 @@ export const useAuthStore = create((set, get) => ({
   },
 
   selectRole: async (role) => {
-    const res = await axiosInstance.put('/user/select-role', { role });
+    const res = await axiosInstance.put('/api/user/select-role', { role });
     set({ authUser: res.data.user });
     return res.data;
   },
 
   updateProfile: async (profileData) => {
-    const res = await axiosInstance.put('/user/profile', profileData);
+    const res = await axiosInstance.put('/api/user/profile', profileData);
     set({ authUser: res.data.user });
     return res.data;
   },
 
   updateFreelancerProfile: async (profileData) => {
-    const res = await axiosInstance.put('/user/freelancer-profile', profileData);
+    const res = await axiosInstance.put('/api/user/freelancer-profile', profileData);
     set({ authUser: res.data.user });
     return res.data;
   },
@@ -88,7 +88,7 @@ export const useAuthStore = create((set, get) => ({
       const formData = new FormData();
       formData.append('photo', file);
 
-      const res = await axiosInstance.post('/user/upload-photo', formData, {
+      const res = await axiosInstance.post('/api/user/upload-photo', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 

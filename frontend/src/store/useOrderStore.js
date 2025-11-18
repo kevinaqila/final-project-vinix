@@ -10,7 +10,7 @@ export const useOrderStore = create((set, get) => ({
   createOrder: async (orderData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.post('/orders', orderData);
+      const res = await axiosInstance.post('/api/orders', orderData);
       set({ isLoading: false });
       return res.data;
     } catch (error) {
@@ -22,7 +22,7 @@ export const useOrderStore = create((set, get) => ({
   fetchMyOrders: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.get('/orders/my-orders');
+      const res = await axiosInstance.get('/api/orders/my-orders');
       set({ orders: res.data.orders, isLoading: false });
       return res.data;
     } catch (error) {
@@ -34,7 +34,7 @@ export const useOrderStore = create((set, get) => ({
   fetchOrderById: async (id) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.get(`/orders/${id}`);
+      const res = await axiosInstance.get(`/api/orders/${id}`);
       set({ selectedOrder: res.data.order, isLoading: false });
       return res.data;
     } catch (error) {
@@ -46,7 +46,7 @@ export const useOrderStore = create((set, get) => ({
   acceptOrder: async (id) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.put(`/orders/${id}/accept`);
+      const res = await axiosInstance.put(`/api/orders/${id}/accept`);
       set({
         selectedOrder: res.data.order,
         orders: get().orders.map((o) => (o._id === id ? res.data.order : o)),
@@ -62,7 +62,7 @@ export const useOrderStore = create((set, get) => ({
   submitWork: async (id, submitData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.put(`/orders/${id}/submit`, submitData || {});
+      const res = await axiosInstance.put(`/api/orders/${id}/submit`, submitData || {});
       set({
         selectedOrder: res.data.order,
         orders: get().orders.map((o) => (o._id === id ? res.data.order : o)),
@@ -78,7 +78,7 @@ export const useOrderStore = create((set, get) => ({
   requestRevision: async (id, revisionData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.put(`/orders/${id}/revision`, revisionData);
+      const res = await axiosInstance.put(`/api/orders/${id}/revision`, revisionData);
       set({
         selectedOrder: res.data.order,
         orders: get().orders.map((o) => (o._id === id ? res.data.order : o)),
@@ -94,7 +94,7 @@ export const useOrderStore = create((set, get) => ({
   approveOrder: async (id) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.put(`/orders/${id}/approve`);
+      const res = await axiosInstance.put(`/api/orders/${id}/approve`);
       set({
         selectedOrder: res.data.order,
         orders: get().orders.map((o) => (o._id === id ? res.data.order : o)),
@@ -115,7 +115,7 @@ export const useOrderStore = create((set, get) => ({
         formData.append('files', file);
       });
 
-      const res = await axiosInstance.post(`/orders/${id}/upload`, formData, {
+      const res = await axiosInstance.post(`/api/orders/${id}/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       set({ selectedOrder: res.data.order, isLoading: false });

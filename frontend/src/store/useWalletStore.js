@@ -14,7 +14,7 @@ export const useWalletStore = create((set, get) => ({
   fetchWalletBalance: async () => {
     set({ isLoading: true });
     try {
-      const res = await axiosInstance.get("/wallet/balance");
+      const res = await axiosInstance.get("/api/wallet/balance");
       set({
         walletBalance: res.data.walletBalance,
         totalEarnings: res.data.totalEarnings,
@@ -31,7 +31,7 @@ export const useWalletStore = create((set, get) => ({
   fetchWithdrawalHistory: async () => {
     set({ isLoading: true });
     try {
-      const res = await axiosInstance.get("/wallet/history");
+      const res = await axiosInstance.get("/api/wallet/history");
       set({ withdrawalHistory: res.data, isLoading: false });
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to fetch withdrawal history");
@@ -42,7 +42,7 @@ export const useWalletStore = create((set, get) => ({
   requestWithdrawal: async (data) => {
     set({ isSubmitting: true });
     try {
-      const res = await axiosInstance.post("/wallet/withdraw", data);
+      const res = await axiosInstance.post("/api/wallet/withdraw", data);
       toast.success("Withdrawal request submitted successfully!");
 
       await get().fetchWalletBalance();
@@ -59,7 +59,7 @@ export const useWalletStore = create((set, get) => ({
 
   cancelWithdrawal: async (id) => {
     try {
-      await axiosInstance.patch(`/wallet/cancel/${id}`);
+      await axiosInstance.patch(`/api/wallet/cancel/${id}`);
       toast.success("Withdrawal cancelled successfully");
 
       await get().fetchWalletBalance();

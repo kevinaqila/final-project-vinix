@@ -14,7 +14,7 @@ export const useMessageStore = create((set, get) => ({
   fetchConversations: async (showLoading = true) => {
     if (showLoading) set({ isLoading: true });
     try {
-      const res = await axiosInstance.get("/messages/conversations");
+      const res = await axiosInstance.get("/api/messages/conversations");
       set({ conversations: res.data, isLoading: false, isInitialLoad: false });
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to fetch conversations");
@@ -25,7 +25,7 @@ export const useMessageStore = create((set, get) => ({
   fetchMessages: async (orderId, showLoading = true) => {
     if (showLoading) set({ isLoading: true, selectedOrderId: orderId });
     try {
-      const res = await axiosInstance.get(`/messages/${orderId}`);
+      const res = await axiosInstance.get(`/api/messages/${orderId}`);
       set({ messages: res.data, isLoading: false, isInitialLoad: false });
 
       await get().fetchUnreadCount();
@@ -38,7 +38,7 @@ export const useMessageStore = create((set, get) => ({
   sendMessage: async (orderId, messageData) => {
     set({ isSending: true });
     try {
-      const res = await axiosInstance.post(`/messages/${orderId}`, messageData);
+      const res = await axiosInstance.post(`/api/messages/${orderId}`, messageData);
 
       set((state) => ({
         messages: [...state.messages, res.data],
@@ -57,7 +57,7 @@ export const useMessageStore = create((set, get) => ({
 
   fetchUnreadCount: async () => {
     try {
-      const res = await axiosInstance.get("/messages/unread-count");
+      const res = await axiosInstance.get("/api/messages/unread-count");
       set({ unreadCount: res.data.unreadCount });
     } catch {
       // Silent error - non-critical feature

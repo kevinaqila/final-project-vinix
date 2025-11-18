@@ -17,7 +17,7 @@ export const useServiceStore = create((set, get) => ({
       if (filters.minPrice) params.append('minPrice', filters.minPrice);
       if (filters.maxPrice) params.append('maxPrice', filters.maxPrice);
 
-      const res = await axiosInstance.get(`/services?${params.toString()}`);
+      const res = await axiosInstance.get(`/api/services?${params.toString()}`);
       set({ services: res.data.services, isLoading: false });
       return res.data;
     } catch (error) {
@@ -29,7 +29,7 @@ export const useServiceStore = create((set, get) => ({
   fetchServiceById: async (id) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.get(`/services/${id}`);
+      const res = await axiosInstance.get(`/api/services/${id}`);
       set({ selectedService: res.data.service, isLoading: false });
       return res.data;
     } catch (error) {
@@ -41,7 +41,7 @@ export const useServiceStore = create((set, get) => ({
   fetchMyServices: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.get('/services/my/services');
+      const res = await axiosInstance.get('/api/services/my/services');
       set({ myServices: res.data.services, isLoading: false });
       return res.data;
     } catch (error) {
@@ -53,7 +53,7 @@ export const useServiceStore = create((set, get) => ({
   fetchServicesByFreelancer: async (freelancerId) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.get(`/services?freelancerId=${freelancerId}`);
+      const res = await axiosInstance.get(`/api/services?freelancerId=${freelancerId}`);
       set({ services: res.data.services, isLoading: false });
       return res.data;
     } catch (error) {
@@ -65,7 +65,7 @@ export const useServiceStore = create((set, get) => ({
   createService: async (serviceData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.post('/services', serviceData);
+      const res = await axiosInstance.post('/api/services', serviceData);
       set({
         myServices: [res.data.service, ...get().myServices],
         isLoading: false,
@@ -80,7 +80,7 @@ export const useServiceStore = create((set, get) => ({
   updateService: async (id, serviceData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.put(`/services/${id}`, serviceData);
+      const res = await axiosInstance.put(`/api/services/${id}`, serviceData);
       set({
         myServices: get().myServices.map((s) => (s._id === id ? res.data.service : s)),
         isLoading: false,
@@ -95,7 +95,7 @@ export const useServiceStore = create((set, get) => ({
   deleteService: async (id) => {
     set({ isLoading: true, error: null });
     try {
-      await axiosInstance.delete(`/services/${id}`);
+      await axiosInstance.delete(`/api/services/${id}`);
       set({
         myServices: get().myServices.filter((s) => s._id !== id),
         isLoading: false,
