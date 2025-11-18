@@ -28,13 +28,15 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { useAuthStore } from "./store/useAuthStore";
 
 const App = () => {
-  const { checkAuth } = useAuthStore();
+  const { checkAuth, authUser } = useAuthStore();
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+    if (!authUser) {
+      checkAuth();
+    }
+  }, []);
 
   // Scroll to top on route change
   useEffect(() => {

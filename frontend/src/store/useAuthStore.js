@@ -28,14 +28,14 @@ export const useAuthStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post('/api/auth/login', data);
         localStorage.setItem('token', res.data.token);
-        
-        toast.success('Login berhasil!');
+                
         set({ authUser: res.data.user });
+        toast.success('Login berhasil!');
         
         if (res.data.user.role) {
         window.location.href = '/dashboard';
-    } else {
-      window.location.href = '/select-role';
+        } else {
+        window.location.href = '/select-role';
         }
 
     } catch (error) {
