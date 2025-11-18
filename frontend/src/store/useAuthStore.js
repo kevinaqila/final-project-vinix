@@ -24,37 +24,58 @@ export const useAuthStore = create((set, get) => ({
   },
 
   login: async (data) => {
-    set({ isLoggingIn: true });
-    try {
-        const res = await axiosInstance.post('/api/auth/login', data);
-
-        const user = res.data?.user;
-        if (!user) {
-          throw new Error('User data is missing in the response');
-        }
-        
-        localStorage.setItem('token', res.data.token);
-                
-        set({ authUser: res.data.user });
-        toast.success('Login berhasil!');
-
-        
-        setTimeout(() => {
-            const userRole = user.role;
-        if (userRole && userRole !== '' && userRole !== null) {
-          window.location.href = `/${userRole}/dashboard`; 
-        } else {
-          window.location.href = '/select-role';
-        }
-        }, 100);
-        
-    } catch (error) {
-      const msg = error.response?.data?.message || 'Email atau password salah.';
-      toast.error(msg);
-    } finally {
-      set({ isLoggingIn: false });
+  console.log('🚀 Starting login process...');
+  set({ isLoggingIn: true });
+  
+  try {
+    console.log('📤 Sending login request:', data);
+    const res = await axiosInstance.post('/api/auth/login', data);
+    
+    console.log('📥 Login response status:', res.status);
+    console.log('📥 Login response data:', res.data);
+    console.log('🔑 Token in response:', !!res.data.token);
+    console.log('👤 User in response:', res.data.user);
+    
+    if (!res.data.user) {
+      console.error('❌ No user data in response!');
+      throw new Error('Login response missing user data');
     }
-  },
+    
+    localStorage.setItem('token', res.data.token);
+    console.log('💾 Token saved to localStorage');
+    
+    set({ authUser: res.data.user });
+    console.log('🔄 authUser set in state');
+    
+    toast.success('Login berhasil!');
+    console.log('✅ Success toast shown');
+    
+    // Role check with debug
+    setTimeout(() => {
+      const userRole = res.data.user?.role;
+      console.log('🎭 Checking role:', userRole);
+      
+      if (userRole && userRole !== '' && userRole !== null) {
+        console.log('📍 Redirecting to dashboard');
+        window.location.href = `/${userRole}/dashboard`; 
+      } else {
+        console.log('📍 Redirecting to select-role');
+        window.location.href = '/select-role';
+      }
+    }, 100);
+    
+  } catch (error) {
+    console.error('❌ Login error caught:', error);
+    console.error('❌ Error response:', error.response?.data);
+    console.error('❌ Error status:', error.response?.status);
+    
+    const msg = error.response?.data?.message || 'Email atau password salah.';
+    toast.error(msg);
+  } finally {
+    set({ isLoggingIn: false });
+    console.log('🏁 Login process finished');
+  }
+},
 
   logout: () => {
     localStorage.removeItem('token');
