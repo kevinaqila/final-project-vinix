@@ -456,7 +456,7 @@ const OrderDetailPage = () => {
                       <div className="flex items-center justify-between">
                         <span className="text-gray-700 font-medium">Client:</span>
                         <button
-                          onClick={() => navigate(`/api/user/${order.clientId._id}`)}
+                          onClick={() => navigate(`/user/${order.clientId._id}`)}
                           className="font-semibold text-green-600 hover:text-green-700 hover:underline transition-colors"
                         >
                           {order.clientId.fullName}
@@ -465,7 +465,7 @@ const OrderDetailPage = () => {
                       <div className="flex items-center justify-between">
                         <span className="text-gray-700 font-medium">Freelancer:</span>
                         <button
-                          onClick={() => navigate(`/api/user/${order.freelancerId._id}`)}
+                          onClick={() => navigate(`/user/${order.freelancerId._id}`)}
                           className="font-semibold text-green-600 hover:text-green-700 hover:underline transition-colors"
                         >
                           {order.freelancerId.fullName}

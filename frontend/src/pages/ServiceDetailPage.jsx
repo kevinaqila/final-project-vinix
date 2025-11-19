@@ -107,7 +107,7 @@ const ServiceDetailPage = () => {
             {/* Freelancer Info */}
             <div className="flex items-center justify-between">
               <button
-                onClick={() => navigate(`/api/user/${service.freelancerId._id}`)}
+                onClick={() => navigate(`/user/${service.freelancerId._id}`)}
                 className="flex items-center space-x-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 px-6 py-4 rounded-xl transition-all group"
               >
                 <div className="h-12 w-12 rounded-xl overflow-hidden bg-gray-200 ring-2 ring-white/30 group-hover:ring-white/50 transition-all">

@@ -27,7 +27,7 @@ const PublicProfilePage = () => {
   const loadUserProfile = async () => {
     try {
       setLoading(true);
-      const res = await axiosInstance.get(`/api/user/profile/${userId}`);
+      const res = await axiosInstance.get(`/user/profile/${userId}`);
       setUser(res.data);
 
       // Load services if freelancer
