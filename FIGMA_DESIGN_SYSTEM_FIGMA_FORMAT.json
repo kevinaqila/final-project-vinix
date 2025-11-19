@@ -1,0 +1,885 @@
+{
+  "paintStyles": [
+    {
+      "id": "primary-green-50",
+      "name": "Primary / Green 50",
+      "description": "Light green color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.9411764705882353,
+          "g": 0.9921568627450981,
+          "b": 0.9568627450980393,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "primary-green-100",
+      "name": "Primary / Green 100",
+      "description": "Very light green color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.8627450980392157,
+          "g": 0.9686274509803922,
+          "b": 0.9058823529411765,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "primary-green-500",
+      "name": "Primary / Green 500",
+      "description": "Main green color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.13333333333333333,
+          "g": 0.7725490196078432,
+          "b": 0.3686274509803922,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "primary-green-600",
+      "name": "Primary / Green 600",
+      "description": "Darker green color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.08627450980392157,
+          "g": 0.6274509803921569,
+          "b": 0.2901960784313726,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "primary-green-700",
+      "name": "Primary / Green 700",
+      "description": "Dark green color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.08235294117647059,
+          "g": 0.5529411764705883,
+          "b": 0.23921568627450981,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "primary-green-800",
+      "name": "Primary / Green 800",
+      "description": "Very dark green color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.08627450980392157,
+          "g": 0.4,
+          "b": 0.20392156862745098,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-blue-500",
+      "name": "Secondary / Blue 500",
+      "description": "Main blue color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.23137254901960785,
+          "g": 0.5098039215686274,
+          "b": 0.9647058823529412,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-blue-600",
+      "name": "Secondary / Blue 600",
+      "description": "Darker blue color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.14901960784313725,
+          "g": 0.4196078431372549,
+          "b": 0.9215686274509803,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-blue-700",
+      "name": "Secondary / Blue 700",
+      "description": "Dark blue color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.11372549019607843,
+          "g": 0.36470588235294116,
+          "b": 0.8431372549019608,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-blue-100",
+      "name": "Secondary / Blue 100",
+      "description": "Light blue color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.8588235294117647,
+          "g": 0.9294117647058824,
+          "b": 0.996078431372549,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-purple-500",
+      "name": "Secondary / Purple 500",
+      "description": "Main purple color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.5450980392156862,
+          "g": 0.37254901960784315,
+          "b": 0.9647058823529412,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-purple-600",
+      "name": "Secondary / Purple 600",
+      "description": "Darker purple color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.48627450980392156,
+          "g": 0.23529411764705882,
+          "b": 0.9176470588235294,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-purple-100",
+      "name": "Secondary / Purple 100",
+      "description": "Light purple color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.9294117647058824,
+          "g": 0.9058823529411765,
+          "b": 0.996078431372549,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-amber-500",
+      "name": "Secondary / Amber 500",
+      "description": "Main amber color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.9607843137254902,
+          "g": 0.6196078431372549,
+          "b": 0.043137254901960784,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-amber-600",
+      "name": "Secondary / Amber 600",
+      "description": "Darker amber color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.8431372549019608,
+          "g": 0.4666666666666667,
+          "b": 0.023529411764705882,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "secondary-amber-100",
+      "name": "Secondary / Amber 100",
+      "description": "Light amber color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.996078431372549,
+          "g": 0.9686274509803922,
+          "b": 0.7803921568627451,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-white",
+      "name": "Neutral / White",
+      "description": "White color",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-50",
+      "name": "Neutral / Gray 50",
+      "description": "Very light gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.9764705882352941,
+          "g": 0.9803921568627451,
+          "b": 0.984313725490196,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-100",
+      "name": "Neutral / Gray 100",
+      "description": "Light gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.9529411764705882,
+          "g": 0.9568627450980393,
+          "b": 0.9647058823529412,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-200",
+      "name": "Neutral / Gray 200",
+      "description": "Medium light gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.8980392156862745,
+          "g": 0.9058823529411765,
+          "b": 0.9215686274509803,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-300",
+      "name": "Neutral / Gray 300",
+      "description": "Medium gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.8196078431372549,
+          "g": 0.8274509803921568,
+          "b": 0.8431372549019608,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-400",
+      "name": "Neutral / Gray 400",
+      "description": "Dark medium gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.611764705882353,
+          "g": 0.6235294117647059,
+          "b": 0.6392156862745098,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-500",
+      "name": "Neutral / Gray 500",
+      "description": "Dark gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.4196078431372549,
+          "g": 0.4392156862745098,
+          "b": 0.4549019607843137,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-600",
+      "name": "Neutral / Gray 600",
+      "description": "Darker gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.2980392156862745,
+          "g": 0.3333333333333333,
+          "b": 0.34901960784313724,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-700",
+      "name": "Neutral / Gray 700",
+      "description": "Very dark gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.23137254901960785,
+          "g": 0.2549019607843137,
+          "b": 0.27058823529411763,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-800",
+      "name": "Neutral / Gray 800",
+      "description": "Almost black gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.12156862745098039,
+          "g": 0.14901960784313725,
+          "b": 0.16862745098039217,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "neutral-gray-900",
+      "name": "Neutral / Gray 900",
+      "description": "Black gray",
+      "paint": {
+        "type": "SOLID",
+        "color": {
+          "r": 0.06666666666666667,
+          "g": 0.09019607843137255,
+          "b": 0.10588235294117647,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "gradient-primary",
+      "name": "Gradient / Primary",
+      "description": "Primary green gradient",
+      "paint": {
+        "type": "GRADIENT_LINEAR",
+        "gradientHandlePositions": [
+          { "x": 0, "y": 0.5 },
+          { "x": 1, "y": 0.5 }
+        ],
+        "gradientStops": [
+          {
+            "position": 0,
+            "color": {
+              "r": 0.13333333333333333,
+              "g": 0.7725490196078432,
+              "b": 0.3686274509803922,
+              "a": 1
+            }
+          },
+          {
+            "position": 1,
+            "color": {
+              "r": 0.08627450980392157,
+              "g": 0.6274509803921569,
+              "b": 0.2901960784313726,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gradient-hero",
+      "name": "Gradient / Hero",
+      "description": "Hero background gradient",
+      "paint": {
+        "type": "GRADIENT_LINEAR",
+        "gradientHandlePositions": [
+          { "x": 0, "y": 0.5 },
+          { "x": 1, "y": 0.5 }
+        ],
+        "gradientStops": [
+          {
+            "position": 0,
+            "color": {
+              "r": 0.9764705882352941,
+              "g": 0.9803921568627451,
+              "b": 0.984313725490196,
+              "a": 1
+            }
+          },
+          {
+            "position": 1,
+            "color": {
+              "r": 0.8627450980392157,
+              "g": 0.9686274509803922,
+              "b": 0.9058823529411765,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gradient-cta",
+      "name": "Gradient / CTA",
+      "description": "Call to action gradient",
+      "paint": {
+        "type": "GRADIENT_LINEAR",
+        "gradientHandlePositions": [
+          { "x": 0, "y": 0.5 },
+          { "x": 1, "y": 0.5 }
+        ],
+        "gradientStops": [
+          {
+            "position": 0,
+            "color": {
+              "r": 0.08627450980392157,
+              "g": 0.6274509803921569,
+              "b": 0.2901960784313726,
+              "a": 1
+            }
+          },
+          {
+            "position": 1,
+            "color": {
+              "r": 0.08235294117647059,
+              "g": 0.5529411764705883,
+              "b": 0.23921568627450981,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gradient-card-hover",
+      "name": "Gradient / Card Hover",
+      "description": "Card hover gradient",
+      "paint": {
+        "type": "GRADIENT_LINEAR",
+        "gradientHandlePositions": [
+          { "x": 0, "y": 0.5 },
+          { "x": 1, "y": 0.5 }
+        ],
+        "gradientStops": [
+          {
+            "position": 0,
+            "color": {
+              "r": 0.9529411764705882,
+              "g": 0.9568627450980393,
+              "b": 0.9647058823529412,
+              "a": 1
+            }
+          },
+          {
+            "position": 1,
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "textStyles": [
+    {
+      "id": "typography-hero",
+      "name": "Typography / Hero",
+      "description": "Hero text size",
+      "fontSize": 48,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": -2
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-section",
+      "name": "Typography / Section",
+      "description": "Section heading size",
+      "fontSize": 36,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": -2
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-card",
+      "name": "Typography / Card",
+      "description": "Card title size",
+      "fontSize": 24,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-large",
+      "name": "Typography / Large",
+      "description": "Large text size",
+      "fontSize": 20,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-regular",
+      "name": "Typography / Regular",
+      "description": "Regular text size",
+      "fontSize": 18,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-small",
+      "name": "Typography / Small",
+      "description": "Small text size",
+      "fontSize": 16,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-label",
+      "name": "Typography / Label",
+      "description": "Label text size",
+      "fontSize": 14,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-caption",
+      "name": "Typography / Caption",
+      "description": "Caption text size",
+      "fontSize": 12,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-bold",
+      "name": "Typography / Bold",
+      "description": "Bold font weight",
+      "fontSize": 16,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Bold"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-medium",
+      "name": "Typography / Medium",
+      "description": "Medium font weight",
+      "fontSize": 16,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    },
+    {
+      "id": "typography-normal",
+      "name": "Typography / Normal",
+      "description": "Normal font weight",
+      "fontSize": 16,
+      "textDecoration": "NONE",
+      "fontName": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "lineHeight": {
+        "unit": "AUTO"
+      },
+      "paragraphIndent": 0,
+      "paragraphSpacing": 0,
+      "textCase": "ORIGINAL"
+    }
+  ],
+  "effectStyles": [
+    {
+      "id": "effect-shadow-lg",
+      "name": "Effect / Shadow LG",
+      "description": "Large shadow",
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "visible": true,
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0.1
+          },
+          "blendMode": "NORMAL",
+          "offset": {
+            "x": 0,
+            "y": 10
+          },
+          "radius": 15,
+          "spread": -3
+        }
+      ]
+    },
+    {
+      "id": "effect-shadow-2xl",
+      "name": "Effect / Shadow 2XL",
+      "description": "Extra large shadow",
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "visible": true,
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0.25
+          },
+          "blendMode": "NORMAL",
+          "offset": {
+            "x": 0,
+            "y": 25
+          },
+          "radius": 50,
+          "spread": -12
+        }
+      ]
+    },
+    {
+      "id": "effect-backdrop-blur-md",
+      "name": "Effect / Backdrop Blur MD",
+      "description": "Medium backdrop blur",
+      "effects": [
+        {
+          "type": "BACKGROUND_BLUR",
+          "visible": true,
+          "radius": 12
+        }
+      ]
+    },
+    {
+      "id": "effect-backdrop-blur-sm",
+      "name": "Effect / Backdrop Blur SM",
+      "description": "Small backdrop blur",
+      "effects": [
+        {
+          "type": "BACKGROUND_BLUR",
+          "visible": true,
+          "radius": 4
+        }
+      ]
+    }
+  ],
+  "gridStyles": [
+    {
+      "id": "grid-container",
+      "name": "Grid / Container",
+      "description": "Main container grid",
+      "layoutGrids": [
+        {
+          "pattern": "COLUMNS",
+          "sectionSize": 96,
+          "visible": true,
+          "color": {
+            "r": 0.8,
+            "g": 0.8,
+            "b": 0.8,
+            "a": 0.5
+          },
+          "alignment": "STRETCH",
+          "count": 12,
+          "gutterSize": 16,
+          "offset": 24
+        }
+      ]
+    },
+    {
+      "id": "grid-section",
+      "name": "Grid / Section",
+      "description": "Section spacing grid",
+      "layoutGrids": [
+        {
+          "pattern": "ROWS",
+          "sectionSize": 96,
+          "visible": true,
+          "color": {
+            "r": 0.9,
+            "g": 0.9,
+            "b": 0.9,
+            "a": 0.5
+          },
+          "alignment": "STRETCH",
+          "count": 4,
+          "gutterSize": 24,
+          "offset": 0
+        }
+      ]
+    },
+    {
+      "id": "grid-card",
+      "name": "Grid / Card",
+      "description": "Card spacing grid",
+      "layoutGrids": [
+        {
+          "pattern": "ROWS",
+          "sectionSize": 24,
+          "visible": true,
+          "color": {
+            "r": 0.95,
+            "g": 0.95,
+            "b": 0.95,
+            "a": 0.5
+          },
+          "alignment": "STRETCH",
+          "count": 2,
+          "gutterSize": 8,
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}

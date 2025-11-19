@@ -1,7 +1,8 @@
 {
   "project": "FinancePro",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "lastUpdated": "2025-11-19",
+  "description": "Complete design system for FinancePro platform including all pages and components",
   "colors": {
     "primary": {
       "green-50": "#f0fdf4",
@@ -12,7 +13,16 @@
       "green-800": "#166534"
     },
     "secondary": {
-      "teal-500": "#14b8a6"
+      "blue-500": "#3b82f6",
+      "blue-600": "#2563eb",
+      "blue-700": "#1d4ed8",
+      "blue-100": "#dbeafe",
+      "purple-500": "#8b5cf6",
+      "purple-600": "#7c3aed",
+      "purple-100": "#ede9fe",
+      "amber-500": "#f59e0b",
+      "amber-600": "#d97706",
+      "amber-100": "#fef3c7"
     },
     "neutral": {
       "white": "#ffffff",
@@ -21,406 +31,293 @@
       "gray-200": "#e5e7eb",
       "gray-300": "#d1d5db",
       "gray-400": "#9ca3af",
+      "gray-500": "#6b7280",
       "gray-600": "#4b5563",
       "gray-700": "#374151",
+      "gray-800": "#1f2937",
       "gray-900": "#111827"
-    },
-    "additional": {
-      "blue-50": "#eff6ff",
-      "blue-100": "#dbeafe",
-      "blue-500": "#3b82f6",
-      "blue-600": "#2563eb",
-      "purple-100": "#f3e8ff",
-      "purple-600": "#a855f7",
-      "yellow-400": "#facc15",
-      "yellow-500": "#eab308",
-      "red-500": "#ef4444",
-      "red-600": "#dc2626"
     }
   },
   "gradients": {
-    "backgroundPage": {
-      "type": "linear",
-      "direction": "to-br",
-      "angle": 315,
-      "stops": [
-        { "color": "#f8fafc", "position": 0, "name": "Slate-50" },
-        { "color": "#eff6ff", "position": 50, "name": "Blue-50" },
-        { "color": "#f0fdf4", "position": 100, "name": "Green-50" }
-      ]
-    },
-    "buttonPrimary": {
-      "type": "linear",
-      "direction": "to-r",
-      "angle": 90,
-      "stops": [
-        { "color": "#16a34a", "position": 0, "name": "Green-600" },
-        { "color": "#22c55e", "position": 100, "name": "Green-500" }
-      ],
-      "hoverStops": [
-        { "color": "#15803d", "position": 0, "name": "Green-700" },
-        { "color": "#16a34a", "position": 100, "name": "Green-600" }
-      ]
-    },
-    "featureSection": {
-      "type": "linear",
-      "direction": "to-br",
-      "angle": 315,
-      "stops": [
-        { "color": "#16a34a", "position": 0, "name": "Green-600" },
-        { "color": "#22c55e", "position": 50, "name": "Green-500" },
-        { "color": "#14b8a6", "position": 100, "name": "Teal-500" }
-      ]
-    },
-    "ctaSection": {
-      "type": "linear",
-      "direction": "to-r",
-      "angle": 90,
-      "stops": [
-        { "color": "#16a34a", "position": 0, "name": "Green-600" },
-        { "color": "#166534", "position": 100, "name": "Green-800" }
-      ]
-    }
+    "primary": "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
+    "hero": "linear-gradient(135deg, #f9fafb 0%, #dcfce7 100%)",
+    "cta": "linear-gradient(135deg, #16a34a 0%, #15803d 100%)",
+    "cardHover": "linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%)"
   },
   "typography": {
-    "fontFamily": "Inter, system-ui, Segoe UI, sans-serif",
-    "headings": [
-      {
-        "name": "H1",
-        "size": 48,
-        "weight": 700,
-        "lineHeight": 1.2,
-        "letterSpacing": -0.02
-      },
-      {
-        "name": "H2",
-        "size": 36,
-        "weight": 700,
-        "lineHeight": 1.2,
-        "letterSpacing": -0.02
-      },
-      {
-        "name": "H3",
-        "size": 30,
-        "weight": 700,
-        "lineHeight": 1.3,
-        "letterSpacing": -0.01
-      },
-      {
-        "name": "H4",
-        "size": 24,
-        "weight": 700,
-        "lineHeight": 1.4,
-        "letterSpacing": 0
-      },
-      {
-        "name": "H5",
-        "size": 20,
-        "weight": 600,
-        "lineHeight": 1.4,
-        "letterSpacing": 0
-      }
-    ],
-    "body": [
-      {
-        "name": "Body-lg",
-        "size": 18,
-        "weight": 400,
-        "lineHeight": 1.75
-      },
-      {
-        "name": "Body",
-        "size": 16,
-        "weight": 400,
-        "lineHeight": 1.5
-      },
-      {
-        "name": "Body-sm",
-        "size": 14,
-        "weight": 400,
-        "lineHeight": 1.5
-      },
-      {
-        "name": "Xs",
-        "size": 12,
-        "weight": 400,
-        "lineHeight": 1.5
-      }
-    ]
-  },
-  "spacing": {
-    "scale": {
-      "0": "0px",
-      "1": "4px",
-      "2": "8px",
-      "3": "12px",
-      "4": "16px",
-      "5": "20px",
-      "6": "24px",
-      "8": "32px",
-      "10": "40px",
-      "12": "48px",
-      "16": "64px",
-      "20": "80px",
-      "24": "96px"
+    "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
+    "sizes": {
+      "hero": "text-5xl lg:text-6xl (48px-60px)",
+      "section": "text-4xl (36px)",
+      "card": "text-2xl (24px)",
+      "large": "text-xl (20px)",
+      "regular": "text-lg (18px)",
+      "small": "text-base (16px)",
+      "label": "text-sm (14px)",
+      "caption": "text-xs (12px)"
     },
-    "common": {
-      "paddingCard": "p-8 lg:p-12",
-      "paddingForm": "p-4 to p-6",
-      "gap": "gap-4 to gap-8",
-      "marginSection": "mb-6 to mb-8"
+    "weights": {
+      "bold": "font-bold (700)",
+      "medium": "font-medium (500)",
+      "normal": "font-normal (400)"
     }
   },
   "components": {
-    "button": {
+    "buttons": {
       "primary": {
-        "classes": "bg-linear-to-r from-green-600 to-green-500 text-white rounded-xl px-4 py-3.5",
-        "hover": "from-green-700 to-green-600 shadow-xl transform hover:-translate-y-0.5",
-        "focus": "ring-2 ring-offset-2 ring-green-500",
-        "disabled": "opacity-50 cursor-not-allowed",
-        "font": "text-base font-semibold",
-        "shadow": "shadow-lg hover:shadow-xl",
-        "transition": "transition-all"
+        "usedIn": ["LoginPage", "SignUpPage", "HomePage", "Dashboard", "ServiceDetailPage"],
+        "styles": "bg-linear-to-r from-green-600 to-green-700 rounded-xl shadow-lg hover:scale-105",
+        "text": "white font-bold",
+        "padding": "px-6 py-3"
       },
       "secondary": {
-        "classes": "bg-gray-100 text-gray-900 rounded-xl px-4 py-3.5 border-2 border-gray-300",
-        "hover": "border-green-600 text-green-600 bg-gray-50"
+        "usedIn": ["HomePage", "Service cards", "ProfilePage"],
+        "styles": "bg-white border-2 border-gray-300 rounded-xl hover:border-green-600",
+        "text": "gray-900 font-bold",
+        "padding": "px-6 py-3"
       },
-      "outline": {
-        "classes": "bg-transparent text-green-600 border-2 border-green-600 rounded-xl px-4 py-3.5",
-        "hover": "bg-green-50"
+      "categoryPills": {
+        "usedIn": ["ServicesPage", "ProfilePage"],
+        "styles": "bg-gray-100 hover:bg-gray-200 rounded-lg transform hover:scale-105",
+        "active": "bg-linear-to-r from-green-600 to-green-700 text-white"
       },
-      "danger": {
-        "classes": "bg-red-600 text-white rounded-xl px-4 py-3.5",
-        "hover": "bg-red-700"
+      "modalButtons": {
+        "usedIn": ["ConfirmModal", "InputModal"],
+        "cancel": "gray border",
+        "confirm": "green/blue/red variants"
       }
     },
-    "input": {
-      "text": {
-        "classes": "px-4 py-3.5 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400",
-        "focus": "ring-2 ring-green-500 border-transparent",
-        "withIconLeft": "pl-12",
-        "withIconRight": "pr-12",
-        "error": "border-red-300 focus:ring-red-500"
+    "inputs": {
+      "search": {
+        "usedIn": ["ClientDashboard", "ServicesPage", "MessagesPage"],
+        "styles": "bg-white rounded-xl shadow-2xl pl-14 pr-6 py-4",
+        "icon": "Search left, green on focus",
+        "focus": "focus:ring-4 focus:ring-green-300"
       },
-      "textarea": {
-        "classes": "w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 resize-none",
-        "minHeight": "min-h-24",
-        "focus": "ring-2 ring-green-500 border-transparent"
+      "form": {
+        "usedIn": ["LoginPage", "SignUpPage", "ProfilePage"],
+        "styles": "bg-gray-50 border border-gray-300 rounded-xl px-4 py-2",
+        "focus": "focus:ring-2 focus:ring-green-500 focus:border-green-500"
+      },
+      "file": {
+        "usedIn": ["ProfilePage"],
+        "styles": "hidden input, custom button with camera icon"
       }
     },
-    "card": {
-      "default": {
-        "classes": "bg-white rounded-2xl p-6 shadow-lg border border-gray-200",
-        "hover": "shadow-xl border-green-500"
+    "cards": {
+      "service": {
+        "usedIn": ["ServicesPage", "HomePage"],
+        "styles": "bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl hover:-translate-y-2",
+        "border": "border border-gray-100",
+        "elements": ["category badge top-right", "freelancer avatar", "title", "rating", "price"]
       },
-      "premium": {
-        "classes": "bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-200/50 p-8 lg:p-12",
-        "blur": "backdrop-blur-xl (40px)"
+      "stats": {
+        "usedIn": ["ClientDashboard", "FreelancerDashboard"],
+        "styles": "bg-linear-to-br from-[color] to-[color] rounded-2xl p-6 text-white",
+        "colors": ["blue-500→blue-600", "purple-500→purple-600", "emerald-500→emerald-600", "amber-500→amber-600"]
       },
       "feature": {
-        "classes": "bg-linear-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-200",
+        "usedIn": ["HomePage"],
+        "styles": "bg-linear-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-200",
         "hover": "hover:border-green-500 hover:shadow-2xl hover:-translate-y-2"
+      },
+      "message": {
+        "usedIn": ["MessagesPage"],
+        "styles": ["sent: green gradient right", "received: white left", "rounded-2xl shadow-lg"]
+      },
+      "review": {
+        "usedIn": ["ServiceDetailPage"],
+        "styles": "border-b, avatar + content layout"
       }
     },
-    "modal": {
-      "backdrop": {
-        "classes": "fixed inset-0 bg-black/50 z-40"
+    "navigation": {
+      "sidebar": {
+        "usedIn": ["All dashboard pages"],
+        "styles": "fixed left bg-white shadow-lg collapsible",
+        "width": ["expanded: 280px", "collapsed: 80px"],
+        "items": "icon + text, hover green accent"
       },
-      "content": {
-        "classes": "fixed inset-0 flex items-center justify-center z-50",
-        "card": "bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto"
+      "topNavigation": {
+        "usedIn": ["HomePage"],
+        "styles": "bg-white/80 backdrop-blur-md sticky top shadow-lg",
+        "logo": "green icon + FinancePro text"
+      },
+      "footer": {
+        "usedIn": ["HomePage", "ServiceDetailPage"],
+        "styles": "bg-white border-t border-gray-200 4-column grid",
+        "links": "hover green, organized by sections"
       }
     },
-    "badge": {
-      "primary": {
-        "classes": "inline-flex items-center space-x-2 px-4 py-2 bg-green-100 rounded-full border border-green-200",
-        "text": "text-sm font-semibold text-green-700"
+    "other": {
+      "starRating": {
+        "usedIn": ["Service cards", "reviews", "ServiceDetailPage"],
+        "styles": "yellow stars, sizes: sm/md/lg",
+        "interactive": "clickable for reviews"
       },
-      "pill": {
-        "classes": "flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm",
-        "text": "font-medium"
-      }
-    },
-    "sidebar": {
-      "container": {
-        "classes": "fixed top-0 left-0 h-screen bg-white border-r border-gray-200 shadow-lg z-40",
-        "widthOpen": "w-64",
-        "widthCollapsed": "w-0 lg:w-20"
+      "loadingSpinner": {
+        "usedIn": ["All pages for loading states"],
+        "styles": "green color, animate-spin, full screen or inline"
       },
-      "itemActive": {
-        "classes": "bg-green-600 text-white rounded-lg px-4 py-3"
+      "modal": {
+        "usedIn": ["ConfirmModal", "InputModal", "ProfilePage add/edit"],
+        "styles": "bg-white rounded-lg shadow-xl centered overlay backdrop blur"
       },
-      "itemInactive": {
-        "classes": "text-gray-700 hover:bg-gray-100 rounded-lg px-4 py-3"
-      }
-    },
-    "avatar": {
-      "classes": "h-10 w-10 rounded-full overflow-hidden bg-gray-200",
-      "image": "object-cover h-full w-full"
-    },
-    "starRating": {
-      "filled": "Star with fill-current text-yellow-500",
-      "empty": "text-gray-300",
-      "sizes": {
-        "sm": "h-4 w-4",
-        "md": "h-5 w-5",
-        "lg": "h-6 w-6"
+      "avatar": {
+        "usedIn": ["Profile sections", "messages", "service cards"],
+        "styles": "rounded-full with fallback icon hover effects"
+      },
+      "badge": {
+        "usedIn": ["Status indicators", "category tags"],
+        "styles": "rounded-full color variants green/blue/yellow/red"
+      },
+      "skeleton": {
+        "usedIn": ["ServiceCardSkeleton", "OrderCardSkeleton"],
+        "styles": "gray animated placeholders matching card layouts"
       }
     }
   },
   "pages": {
-    "login": {
-      "layout": "2-column grid (mobile: 1 col, desktop: 2 col)",
-      "background": "linear-gradient (from-slate-50 via-blue-50 to-green-50)",
-      "card": "bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl",
-      "leftSection": {
-        "content": "form fields, logo, title"
-      },
-      "rightSection": {
-        "background": "linear-gradient (from-green-600 to-teal-500)",
-        "hiddenOnMobile": true,
-        "content": "features, badges"
-      }
+    "HomePage": {
+      "layout": "┌─────────────────────────────────────┐\n│ [Navigation Bar]                    │\n│ Logo + Menu + Auth Buttons          │\n├─────────────────────────────────────┤\n│ [Hero Section]                      │\n│ Title + Description + CTA Buttons   │\n│ + Floating Service Cards            │\n├─────────────────────────────────────┤\n│ [Features Section]                  │\n│ 4 Feature Cards Grid                │\n├─────────────────────────────────────┤\n│ [Services Section]                  │\n│ Service Cards + Popular Badge       │\n├─────────────────────────────────────┤\n│ [CTA Section]                       │\n│ Full-width green gradient           │\n├─────────────────────────────────────┤\n│ [Footer]                            │\n│ Links + Company Info                │\n└─────────────────────────────────────┘",
+      "sections": ["Navigation", "Hero", "Features", "Services", "CTA", "Footer"],
+      "components": ["Top Navigation", "Primary Button", "Secondary Button", "Feature Card", "Service Card", "Footer"]
     },
-    "signup": {
-      "layout": "2-column grid (mobile: 1 col, desktop: 2 col)",
-      "formFields": ["fullName", "email", "password", "confirmPassword"],
-      "validations": {
-        "fullName": "min 2, max 50 chars",
-        "email": "regex validation",
-        "password": "min 8 chars, upper+lower+digit",
-        "confirmPassword": "must match password"
-      }
+    "LoginPage": {
+      "layout": "┌─────────────────────────────────────┐\n│ [Background]                        │\n│ Gradient from-slate-50 to-green-50  │\n├─────────────────┬───────────────────┤\n│ [Form Card]     │ [Visual Side]     │\n│ White card      │ Gradient card     │\n│ Form fields     │ Welcome text      │\n│ Submit button   │ Features list     │\n└─────────────────┴───────────────────┘",
+      "components": ["Form Input", "Primary Button", "Search Input (password with toggle)"]
     },
-    "home": {
-      "sections": [
-        {
-          "name": "Navigation",
-          "classes": "bg-white/80 backdrop-blur-md sticky top-0 z-50"
-        },
-        {
-          "name": "Hero",
-          "layout": "2-column with floating cards"
-        },
-        {
-          "name": "Features",
-          "background": "white",
-          "grid": "4-column"
-        },
-        {
-          "name": "Services",
-          "background": "linear-gradient",
-          "grid": "3-column"
-        },
-        {
-          "name": "CTA",
-          "background": "linear-gradient from-green-600 to-green-800"
-        },
-        {
-          "name": "Footer",
-          "background": "gray-900"
-        }
-      ]
+    "SignUpPage": {
+      "layout": "Similar to LoginPage but with 4 form fields",
+      "components": ["Form Input", "Primary Button", "Search Input (password with toggle)"]
     },
-    "dashboard": {
-      "layout": "Sidebar + Main content",
-      "sidebar": {
-        "width": "w-64 (open) or w-20 (collapsed)",
-        "items": {
-          "client": ["Dashboard", "Cari Jasa", "Pesanan Saya", "Pesan"],
-          "freelancer": ["Dashboard", "Jasa Saya", "Buat Jasa", "Pesanan", "Dompet", "Pesan"]
-        }
-      }
-    }
-  },
-  "effects": {
-    "shadows": {
-      "shadow-sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
-      "shadow-md": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-      "shadow-lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
-      "shadow-xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
-      "shadow-2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+    "ClientDashboard": {
+      "layout": "┌─────────────────────────────────────┐\n│ [Sidebar] [Main Content]            │\n│         ┌─────────────────────────┐ │\n│         │ [Hero Search Banner]    │ │\n│         │ Dark overlay + Search   │ │\n│         ├─────────────────────────┤ │\n│         │ [Stats Cards] 3-col     │ │\n│         │ Blue/Yellow/Green       │ │\n│         ├─────────────────────────┤ │\n│         │ [Categories Grid]       │ │\n│         │ Service categories      │ │\n│         ├─────────────────────────┤ │\n│         │ [Platform Stats]        │ │\n│         │ 3 stats with icons      │ │\n│         └─────────────────────────┘ │\n└─────────────────────────────────────┘",
+      "components": ["Sidebar", "Search Input", "Stats Card", "Category Pills"]
     },
-    "blur": {
-      "backdrop-blur-sm": "4px",
-      "backdrop-blur-md": "12px",
-      "backdrop-blur-xl": "40px"
+    "FreelancerDashboard": {
+      "layout": "┌─────────────────────────────────────┐\n│ [Sidebar] [Main Content]            │\n│         ┌─────────────────────────┐ │\n│         │ [Header Banner]         │ │\n│         │ Green gradient + CTA    │ │\n│         ├─────────────────────────┤ │\n│         │ [Stats Grid] 4-col      │ │\n│         │ Blue/Purple/Emerald/Amber│ │\n│         ├─────────────────────────┤ │\n│         │ [Order Status Cards]    │ │\n│         │ 3 cards with borders     │ │\n│         ├─────────────────────────┤ │\n│         │ [Recent Orders List]    │ │\n│         │ Table with status badges │ │\n│         └─────────────────────────┘ │\n└─────────────────────────────────────┘",
+      "components": ["Sidebar", "Primary Button", "Stats Card", "Badge"]
     },
-    "hoverEffects": [
-      "shadow-xl",
-      "border-green-500",
-      "-translate-y-2",
-      "scale-105",
-      "translate-x-1",
-      "opacity-80"
-    ],
-    "transitions": {
-      "all": "300ms",
-      "colors": "300ms",
-      "transform": "300ms",
-      "opacity": "300ms"
+    "ServicesPage": {
+      "layout": "┌─────────────────────────────────────┐\n│ [Sidebar] [Main Content]            │\n│         ┌─────────────────────────┐ │\n│         │ [Search Header]         │ │\n│         │ Green gradient banner   │ │\n│         ├─────────────────────────┤ │\n│         │ [Category Pills]        │ │\n│         │ Horizontal scroll       │ │\n│         ├─────────────────────────┤ │\n│         │ [Services Grid]         │ │\n│         │ 1-4 columns responsive  │ │\n│         └─────────────────────────┘ │\n└─────────────────────────────────────┘",
+      "components": ["Sidebar", "Search Input", "Category Pills", "Service Card"]
     },
-    "animations": [
-      "animate-spin (loading)",
-      "animate-pulse (fading)"
-    ],
-    "focusStates": {
-      "outline": "outline-none",
-      "ring": "ring-2 ring-green-500",
-      "offset": "ring-offset-2",
-      "border": "border-transparent"
+    "ServiceDetailPage": {
+      "layout": "┌─────────────────────────────────────┐\n│ [Sidebar] [Main Content]            │\n│         ┌─────────────────────────┐ │\n│         │ [Hero Section]          │ │\n│         │ Service info + Rating   │ │\n│         ├─────────────────────────┤ │\n│         │ [Description Card]      │ │\n│         │ Service details         │\n│         ├─────────────────────────┤ │\n│         │ [Checklist Section]     │ │\n│         │ Client/Freelancer tasks │ │\n│         ├─────────────────────────┤ │\n│         │ [Reviews Section]       │ │\n│         │ Customer reviews        │ │\n│         ├─────────────────────────┤ │\n│         │ [Package Sidebar]       │ │\n│         │ Sticky pricing          │ │\n│         └─────────────────────────┘ │\n└─────────────────────────────────────┘",
+      "components": ["Sidebar", "Star Rating", "Review Card", "Primary Button", "Badge"]
     },
-    "disabledStates": [
-      "opacity-50",
-      "cursor-not-allowed"
+    "MessagesPage": {
+      "layout": "┌─────────────────────────────────────┐\n│ [Sidebar] [Main Content]            │\n│         ┌─────────────────────────┐ │\n│         │ [Conversations List]    │ │\n│         │ Left panel, scrollable   │ │\n│         ├─────────────────────────┤ │\n│         │ [Chat Area]             │ │\n│         │ Header + Messages + Input│ │\n│         │ Right panel, full height │ │\n│         └─────────────────────────┘ │\n└─────────────────────────────────────┘",
+      "components": ["Sidebar", "Avatar", "Message Card", "Search Input", "Badge"]
+    },
+    "ProfilePage": {
+      "layout": "┌─────────────────────────────────────┐\n│ [Sidebar] [Main Content]            │\n│         ┌─────────────────────────┐ │\n│         │ [Profile Header]        │ │\n│         │ Photo + Name + Edit     │ │\n│         ├─────────────────────────┤ │\n│         │ [Form Sections]         │ │\n│         │ Basic Info + Bio        │ │\n│         │ Skills/Education/Exp    │ │\n│         │ (Freelancer only)       │ │\n│         └─────────────────────────┘ │\n└─────────────────────────────────────┘",
+      "components": ["Sidebar", "Avatar", "Form Input", "Primary Button", "Secondary Button", "Category Pills", "Modal"]
+    },
+    "additionalPages": [
+      "ClientOnboardingPage",
+      "FreelancerOnboardingPage",
+      "ClientOrdersPage",
+      "FreelancerOrdersPage",
+      "CreateServicePage",
+      "EditServicePage",
+      "OrderCheckoutPage",
+      "OrderDetailPage",
+      "PublicProfilePage",
+      "ReviewPage",
+      "RoleSelectionPage",
+      "WalletPage"
     ]
   },
   "icons": {
     "library": "Lucide React",
-    "navigation": ["Menu", "X", "Home", "Search", "Package", "ShoppingCart", "Wallet", "User", "LogOut", "MessageSquare"],
-    "ui": ["Eye", "EyeOff", "Mail", "Lock", "AlertCircle", "Star"],
-    "content": ["DollarSign", "Shield", "Users", "TrendingUp", "FileText", "Clock", "ArrowRight", "Plus", "Zap", "Award"],
-    "sizing": {
-      "sm": "h-4 w-4",
-      "md": "h-5 w-5 or h-6 w-6",
-      "lg": "h-7 w-7",
-      "xl": "h-8 w-8"
+    "categories": {
+      "navigation": ["Home", "User", "Briefcase", "MessageSquare", "Wallet", "Settings", "LogOut", "SidebarToggle"],
+      "actions": ["Search", "Plus", "Edit2", "Save", "X", "Trash2", "Camera", "Upload", "Download", "Send", "ArrowLeft"],
+      "status": ["CheckCircle", "Clock", "AlertCircle", "XCircle", "RefreshCcw"],
+      "rating": ["Star"],
+      "services": ["FileText", "DollarSign", "TrendingUp", "Package", "Shield", "Award", "Calendar"],
+      "ui": ["ChevronLeft", "ChevronRight", "Menu", "Eye", "EyeOff", "Filter"],
+      "communication": ["MessageSquare", "Mail"],
+      "user": ["UserIcon", "MapPin"]
+    }
+  },
+  "effects": {
+    "hover": ["transform hover:scale-105", "hover:-translate-y-2"],
+    "transitions": "transition-all duration-300",
+    "shadows": ["shadow-lg", "shadow-2xl", "shadow-[color]/50"],
+    "backdrop": ["backdrop-blur-md", "backdrop-blur-sm"],
+    "animations": ["animate-spin", "animate-fade-in", "animate-pulse"]
+  },
+  "spacing": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section": "py-24 (96px), py-16 (64px), py-12 (48px)",
+    "card": "p-6 (24px), p-8 (32px)",
+    "element": "space-x-4 (16px), space-y-8 (32px)"
+  },
+  "responsive": {
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px"
     },
-    "colors": {
-      "primary": "text-green-600",
-      "secondary": "text-gray-400",
-      "white": "text-white",
-      "error": "text-red-600",
-      "success": "text-green-600",
-      "info": "text-blue-600"
-    }
+    "grids": {
+      "1col": "mobile default",
+      "2col": "md:grid-cols-2 (768px+)",
+      "3col": "lg:grid-cols-3 (1024px+)",
+      "4col": "xl:grid-cols-4 (1280px+)"
+    },
+    "utilities": ["text-lg md:text-xl lg:text-2xl", "px-4 sm:px-6 lg:px-8", "flex-col sm:flex-row"]
   },
-  "responsiveBreakpoints": {
-    "mobile": "default (< 640px)",
-    "sm": "640px",
-    "md": "768px",
-    "lg": "1024px",
-    "xl": "1280px",
-    "2xl": "1536px",
-    "commonPatterns": {
-      "fullToTwoColumns": "grid-cols-1 lg:grid-cols-2",
-      "singleToMultiple": "md:grid-cols-2 lg:grid-cols-3 (or lg:grid-cols-4)",
-      "paddingResponsive": "p-4 sm:p-6 lg:p-8",
-      "textSizeResponsive": "text-2xl sm:text-3xl lg:text-4xl",
-      "displayToggle": {
-        "desktopOnly": "hidden lg:block",
-        "hideDesktop": "lg:hidden",
-        "mobileOnly": "block md:hidden"
-      }
-    }
+  "implementation": {
+    "figmaStructure": {
+      "Components": ["Buttons", "Cards", "Inputs", "Navigation", "Other"],
+      "Pages": ["HomePage", "Authentication", "Dashboard", "Services", "MessagesPage", "ProfilePage", "Other Pages"],
+      "Assets": ["Icons (Lucide React)", "Images", "Logos"],
+      "Styles": ["Colors", "Typography", "Effects"]
+    },
+    "steps": [
+      "Import color palette as Figma color styles",
+      "Create master components with variants",
+      "Build page layouts using components",
+      "Add responsive variants (mobile/tablet/desktop)",
+      "Setup prototyping for interactions"
+    ],
+    "checklist": [
+      "All colors implemented",
+      "Typography scales applied",
+      "Components with variants created",
+      "All pages laid out",
+      "Responsive breakpoints tested",
+      "Hover states defined",
+      "Icons sized and colored",
+      "Spacing consistent",
+      "Accessibility considered"
+    ]
   },
-  "notes": {
-    "framework": "Tailwind CSS",
-    "blurEffect": "backdrop-blur-xl (40px) for frosted glass",
-    "gradients": "linear-to-r (right) and linear-to-br (bottom-right)",
-    "icons": "Lucide React, import per icon",
-    "approach": "Mobile-first, expand to lg breakpoint (1024px+)",
-    "brandColor": "Green (#22c55e and #16a34a)"
+  "usage": {
+    "colorPatterns": {
+      "primary": "Green gradients",
+      "secondary": "Gray with green borders",
+      "success": "Green (#22c55e)",
+      "warning": "Amber/Yellow",
+      "info": "Blue",
+      "neutral": "Gray scale"
+    },
+    "componentVariants": {
+      "buttons": ["Primary", "Secondary", "Modal"],
+      "cards": ["Service", "Stats", "Feature", "Message", "Review"],
+      "inputs": ["Search", "Form", "File"],
+      "navigation": ["Sidebar", "Top Nav", "Footer"],
+      "status": ["Pending (yellow)", "In Progress (blue)", "Completed (green)"]
+    },
+    "quickReference": {
+      "backgrounds": "bg-white, bg-gray-50, bg-linear-to-r from-green-600 to-green-700",
+      "text": "text-gray-900, text-gray-600, text-white",
+      "borders": "border border-gray-200, rounded-xl, rounded-2xl",
+      "shadows": "shadow-lg, shadow-2xl",
+      "spacing": "p-6, m-4, space-y-4"
+    }
   }
 }
