@@ -41,6 +41,10 @@ export const FreelancerRoute = () => {
   if (authUser.role !== "freelancer") {
     return <Navigate to="/client/dashboard" replace />;
   }
+  const isDashboardRoute = location.pathname.includes("/dashboard");
+  if (isDashboardRoute && !authUser.isProfileComplete) {
+    return <Navigate to="/freelancer/onboarding" replace />;
+  }
 
   return <Outlet />;
 };
@@ -63,6 +67,11 @@ export const ClientRoute = () => {
 
   if (authUser.role !== "client") {
     return <Navigate to="/freelancer/dashboard" replace />;
+  }
+
+  const isDashboardRoute = location.pathname.includes("/dashboard");
+  if (isDashboardRoute && !authUser.isProfileComplete) {
+    return <Navigate to="/client/onboarding" replace />;
   }
 
   return <Outlet />;
