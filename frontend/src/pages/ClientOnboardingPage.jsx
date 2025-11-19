@@ -9,25 +9,25 @@ const ClientOnboardingPage = () => {
   const [formData, setFormData] = useState({
     businessName: "",
     businessType: "",
-    // Personal finance fields
-    monthlyIncome: "",
-    financialGoals: "",
+    investmentExperience: "",
+    timeHorizon: "",
+    primaryGoal: "",
     riskTolerance: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClientTypeChange = (type) => {
     setClientType(type);
-    // Reset form data when switching type
     setFormData({
       businessName: "",
       businessType: "",
-      monthlyIncome: "",
-      financialGoals: "",
+      ageRange: "",
+      investmentExperience: "",
+      timeHorizon: "",
+      primaryGoal: "",
       riskTolerance: "",
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -119,32 +119,49 @@ const ClientOnboardingPage = () => {
           {clientType === "personal" && (
             <>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Pendapatan Bulanan</label>
-                <input
-                  type="number"
+                <label className="block text-sm font-medium text-gray-700 mb-1">Pengalaman Investasi</label>
+                <select
                   required
-                  value={formData.monthlyIncome}
-                  onChange={(e) => setFormData({ ...formData, monthlyIncome: e.target.value })}
+                  value={formData.investmentExperience}
+                  onChange={(e) => setFormData({ ...formData, investmentExperience: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="5000000"
-                />
+                >
+                  <option value="">Pilih tingkat pengalaman Anda</option>
+                  <option value="beginner">Pemula - Baru mulai berinvestasi</option>
+                  <option value="intermediate">Menengah - Sudah berinvestasi 1-3 tahun</option>
+                  <option value="advanced">Mahir - Berpengalaman >3 tahun</option>
+                </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Tujuan Keuangan</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Horizon Waktu Investasi</label>
                 <select
                   required
-                  value={formData.financialGoals}
-                  onChange={(e) => setFormData({ ...formData, financialGoals: e.target.value })}
+                  value={formData.timeHorizon}
+                  onChange={(e) => setFormData({ ...formData, timeHorizon: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 >
-                  <option value="">Pilih tujuan</option>
-                  <option value="retirement">Persiapan Pensiun</option>
-                  <option value="investment">Investasi Jangka Panjang</option>
-                  <option value="debt">Pelunasan Hutang</option>
-                  <option value="education">Pendidikan Anak</option>
-                  <option value="emergency">Dana Darurat</option>
-                  <option value="other">Lainnya</option>
+                  <option value="">Pilih jangka waktu investasi Anda</option>
+                  <option value="short">Jangka Pendek (1-3 tahun) - Kebutuhan mendesak</option>
+                  <option value="medium">Jangka Menengah (3-7 tahun) - Tujuan jangka menengah</option>
+                  <option value="long">Jangka Panjang (7+ tahun) - Persiapan masa depan</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Tujuan Utama</label>
+                <select
+                  required
+                  value={formData.primaryGoal}
+                  onChange={(e) => setFormData({ ...formData, primaryGoal: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option value="">Pilih tujuan investasi utama Anda</option>
+                  <option value="retirement">Persiapan Pensiun - Mengumpulkan dana untuk masa tua</option>
+                  <option value="wealth">Membangun Kekayaan - Meningkatkan nilai investasi jangka panjang</option>
+                  <option value="education">Pendidikan - Biaya kuliah anak atau pengembangan diri</option>
+                  <option value="emergency">Dana Darurat - Tabungan untuk keadaan darurat</option>
+                  <option value="debt">Pelunasan Hutang - Mengurangi beban hutang</option>
                 </select>
               </div>
 
@@ -156,10 +173,10 @@ const ClientOnboardingPage = () => {
                   onChange={(e) => setFormData({ ...formData, riskTolerance: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 >
-                  <option value="">Pilih toleransi risiko</option>
-                  <option value="low">Rendah (Konservatif)</option>
-                  <option value="medium">Sedang (Moderasi)</option>
-                  <option value="high">Tinggi (Agresif)</option>
+                  <option value="">Pilih tingkat toleransi risiko Anda</option>
+                  <option value="low">Rendah (Konservatif) - Lebih suka keamanan, hindari kerugian</option>
+                  <option value="medium">Sedang (Moderat) - Seimbang antara risiko dan return</option>
+                  <option value="high">Tinggi (Agresif) - Siap menerima fluktuasi untuk return tinggi</option>
                 </select>
               </div>
             </>

@@ -55,7 +55,8 @@ export const updateFreelancerProfile = async (req, res) => {
 
 export const updateClientProfile = async (req, res) => {
   try {
-    const { clientType, businessName, businessType, monthlyIncome, financialGoals, riskTolerance } = req.body;
+    const { clientType, businessName, businessType, investmentExperience, timeHorizon, primaryGoal, riskTolerance } =
+      req.body;
 
     const updateData = {
       clientType,
@@ -66,8 +67,9 @@ export const updateClientProfile = async (req, res) => {
       updateData.businessName = businessName;
       updateData.businessType = businessType;
     } else if (clientType === "personal") {
-      updateData.monthlyIncome = monthlyIncome;
-      updateData.financialGoals = financialGoals;
+      updateData.investmentExperience = investmentExperience;
+      updateData.timeHorizon = timeHorizon;
+      updateData.primaryGoal = primaryGoal;
       updateData.riskTolerance = riskTolerance;
     }
 

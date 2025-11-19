@@ -51,6 +51,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["low", "medium", "high"],
     },
+    investmentExperience: {
+      type: String,
+      enum: ["beginner", "intermediate", "advanced"],
+    },
+    timeHorizon: {
+      type: String,
+      enum: ["short", "medium", "long"],
+    },
+    primaryGoal: {
+      type: String,
+      enum: ["retirement", "wealth", "education", "emergency", "debt"],
+    },
     // Freelancer-specific fields
     education: [
       {

@@ -5,7 +5,7 @@ import { useReviewStore } from "../store/useReviewStore";
 import DashboardLayout from "../components/DashboardLayout";
 import LoadingSpinner from "../components/LoadingSpinner";
 import StarRating from "../components/StarRating";
-import { User, Calendar, Briefcase, Star, MessageSquare, Award, Package, MapPin } from "lucide-react";
+import { User, Calendar, Briefcase, Star, MessageSquare, Award, Package, MapPin, TrendingUp, Target, Clock, Flag, Shield } from "lucide-react";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
@@ -269,6 +269,74 @@ const PublicProfilePage = () => {
                             <div>
                               <p className="text-xs text-gray-500 uppercase tracking-wide">Tipe Bisnis</p>
                               <p className="font-medium text-gray-900">{user.businessType}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Personal Finance Info Card */}
+                  {(user.investmentExperience || user.timeHorizon || user.primaryGoal || user.riskTolerance) && user.clientType === "personal" && (
+                    <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+                      <div className="flex items-center mb-4">
+                        <div className="p-2 bg-blue-100 rounded-lg">
+                          <TrendingUp className="h-5 w-5 text-blue-600" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-gray-900 ml-3">Informasi Keuangan Pribadi</h3>
+                      </div>
+                      <div className="space-y-3">
+                        {user.investmentExperience && (
+                          <div className="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <Target className="h-4 w-4 text-gray-400 mr-3" />
+                            <div>
+                              <p className="text-xs text-gray-500 uppercase tracking-wide">Pengalaman Investasi</p>
+                              <p className="font-medium text-gray-900">
+                                {user.investmentExperience === "beginner" && "Pemula - Baru mulai berinvestasi"}
+                                {user.investmentExperience === "intermediate" && "Menengah - Sudah berinvestasi 1-3 tahun"}
+                                {user.investmentExperience === "advanced" && "Mahir - Berpengalaman >3 tahun"}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                        {user.timeHorizon && (
+                          <div className="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <Clock className="h-4 w-4 text-gray-400 mr-3" />
+                            <div>
+                              <p className="text-xs text-gray-500 uppercase tracking-wide">Horizon Waktu</p>
+                              <p className="font-medium text-gray-900">
+                                {user.timeHorizon === "short" && "Jangka Pendek (1-3 tahun) - Kebutuhan mendesak"}
+                                {user.timeHorizon === "medium" && "Jangka Menengah (3-7 tahun) - Tujuan jangka menengah"}
+                                {user.timeHorizon === "long" && "Jangka Panjang (7+ tahun) - Persiapan masa depan"}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                        {user.primaryGoal && (
+                          <div className="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <Flag className="h-4 w-4 text-gray-400 mr-3" />
+                            <div>
+                              <p className="text-xs text-gray-500 uppercase tracking-wide">Tujuan Utama</p>
+                              <p className="font-medium text-gray-900">
+                                {user.primaryGoal === "retirement" && "Persiapan Pensiun - Mengumpulkan dana untuk masa tua"}
+                                {user.primaryGoal === "wealth" && "Membangun Kekayaan - Meningkatkan nilai investasi jangka panjang"}
+                                {user.primaryGoal === "education" && "Pendidikan - Biaya kuliah anak atau pengembangan diri"}
+                                {user.primaryGoal === "emergency" && "Dana Darurat - Tabungan untuk keadaan darurat"}
+                                {user.primaryGoal === "debt" && "Pelunasan Hutang - Mengurangi beban hutang"}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                        {user.riskTolerance && (
+                          <div className="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <Shield className="h-4 w-4 text-gray-400 mr-3" />
+                            <div>
+                              <p className="text-xs text-gray-500 uppercase tracking-wide">Toleransi Risiko</p>
+                              <p className="font-medium text-gray-900">
+                                {user.riskTolerance === "low" && "Rendah (Konservatif) - Lebih suka keamanan, hindari kerugian"}
+                                {user.riskTolerance === "medium" && "Sedang (Moderat) - Seimbang antara risiko dan return"}
+                                {user.riskTolerance === "high" && "Tinggi (Agresif) - Siap menerima fluktuasi untuk return tinggi"}
+                              </p>
                             </div>
                           </div>
                         )}
