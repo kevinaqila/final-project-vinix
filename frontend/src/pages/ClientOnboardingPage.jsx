@@ -129,7 +129,7 @@ const ClientOnboardingPage = () => {
                   <option value="">Pilih tingkat pengalaman Anda</option>
                   <option value="beginner">Pemula - Baru mulai berinvestasi</option>
                   <option value="intermediate">Menengah - Sudah berinvestasi 1-3 tahun</option>
-                  <option value="advanced">Mahir - Berpengalaman >3 tahun</option>
+                  <option value="advanced">Mahir - Berpengalaman {">3"} tahun</option>
                 </select>
               </div>
 

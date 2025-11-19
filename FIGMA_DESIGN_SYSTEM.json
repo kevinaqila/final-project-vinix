@@ -1,0 +1,426 @@
+{
+  "project": "FinancePro",
+  "version": "1.0.0",
+  "lastUpdated": "2025-11-19",
+  "colors": {
+    "primary": {
+      "green-50": "#f0fdf4",
+      "green-100": "#dcfce7",
+      "green-500": "#22c55e",
+      "green-600": "#16a34a",
+      "green-700": "#15803d",
+      "green-800": "#166534"
+    },
+    "secondary": {
+      "teal-500": "#14b8a6"
+    },
+    "neutral": {
+      "white": "#ffffff",
+      "gray-50": "#f9fafb",
+      "gray-100": "#f3f4f6",
+      "gray-200": "#e5e7eb",
+      "gray-300": "#d1d5db",
+      "gray-400": "#9ca3af",
+      "gray-600": "#4b5563",
+      "gray-700": "#374151",
+      "gray-900": "#111827"
+    },
+    "additional": {
+      "blue-50": "#eff6ff",
+      "blue-100": "#dbeafe",
+      "blue-500": "#3b82f6",
+      "blue-600": "#2563eb",
+      "purple-100": "#f3e8ff",
+      "purple-600": "#a855f7",
+      "yellow-400": "#facc15",
+      "yellow-500": "#eab308",
+      "red-500": "#ef4444",
+      "red-600": "#dc2626"
+    }
+  },
+  "gradients": {
+    "backgroundPage": {
+      "type": "linear",
+      "direction": "to-br",
+      "angle": 315,
+      "stops": [
+        { "color": "#f8fafc", "position": 0, "name": "Slate-50" },
+        { "color": "#eff6ff", "position": 50, "name": "Blue-50" },
+        { "color": "#f0fdf4", "position": 100, "name": "Green-50" }
+      ]
+    },
+    "buttonPrimary": {
+      "type": "linear",
+      "direction": "to-r",
+      "angle": 90,
+      "stops": [
+        { "color": "#16a34a", "position": 0, "name": "Green-600" },
+        { "color": "#22c55e", "position": 100, "name": "Green-500" }
+      ],
+      "hoverStops": [
+        { "color": "#15803d", "position": 0, "name": "Green-700" },
+        { "color": "#16a34a", "position": 100, "name": "Green-600" }
+      ]
+    },
+    "featureSection": {
+      "type": "linear",
+      "direction": "to-br",
+      "angle": 315,
+      "stops": [
+        { "color": "#16a34a", "position": 0, "name": "Green-600" },
+        { "color": "#22c55e", "position": 50, "name": "Green-500" },
+        { "color": "#14b8a6", "position": 100, "name": "Teal-500" }
+      ]
+    },
+    "ctaSection": {
+      "type": "linear",
+      "direction": "to-r",
+      "angle": 90,
+      "stops": [
+        { "color": "#16a34a", "position": 0, "name": "Green-600" },
+        { "color": "#166534", "position": 100, "name": "Green-800" }
+      ]
+    }
+  },
+  "typography": {
+    "fontFamily": "Inter, system-ui, Segoe UI, sans-serif",
+    "headings": [
+      {
+        "name": "H1",
+        "size": 48,
+        "weight": 700,
+        "lineHeight": 1.2,
+        "letterSpacing": -0.02
+      },
+      {
+        "name": "H2",
+        "size": 36,
+        "weight": 700,
+        "lineHeight": 1.2,
+        "letterSpacing": -0.02
+      },
+      {
+        "name": "H3",
+        "size": 30,
+        "weight": 700,
+        "lineHeight": 1.3,
+        "letterSpacing": -0.01
+      },
+      {
+        "name": "H4",
+        "size": 24,
+        "weight": 700,
+        "lineHeight": 1.4,
+        "letterSpacing": 0
+      },
+      {
+        "name": "H5",
+        "size": 20,
+        "weight": 600,
+        "lineHeight": 1.4,
+        "letterSpacing": 0
+      }
+    ],
+    "body": [
+      {
+        "name": "Body-lg",
+        "size": 18,
+        "weight": 400,
+        "lineHeight": 1.75
+      },
+      {
+        "name": "Body",
+        "size": 16,
+        "weight": 400,
+        "lineHeight": 1.5
+      },
+      {
+        "name": "Body-sm",
+        "size": 14,
+        "weight": 400,
+        "lineHeight": 1.5
+      },
+      {
+        "name": "Xs",
+        "size": 12,
+        "weight": 400,
+        "lineHeight": 1.5
+      }
+    ]
+  },
+  "spacing": {
+    "scale": {
+      "0": "0px",
+      "1": "4px",
+      "2": "8px",
+      "3": "12px",
+      "4": "16px",
+      "5": "20px",
+      "6": "24px",
+      "8": "32px",
+      "10": "40px",
+      "12": "48px",
+      "16": "64px",
+      "20": "80px",
+      "24": "96px"
+    },
+    "common": {
+      "paddingCard": "p-8 lg:p-12",
+      "paddingForm": "p-4 to p-6",
+      "gap": "gap-4 to gap-8",
+      "marginSection": "mb-6 to mb-8"
+    }
+  },
+  "components": {
+    "button": {
+      "primary": {
+        "classes": "bg-linear-to-r from-green-600 to-green-500 text-white rounded-xl px-4 py-3.5",
+        "hover": "from-green-700 to-green-600 shadow-xl transform hover:-translate-y-0.5",
+        "focus": "ring-2 ring-offset-2 ring-green-500",
+        "disabled": "opacity-50 cursor-not-allowed",
+        "font": "text-base font-semibold",
+        "shadow": "shadow-lg hover:shadow-xl",
+        "transition": "transition-all"
+      },
+      "secondary": {
+        "classes": "bg-gray-100 text-gray-900 rounded-xl px-4 py-3.5 border-2 border-gray-300",
+        "hover": "border-green-600 text-green-600 bg-gray-50"
+      },
+      "outline": {
+        "classes": "bg-transparent text-green-600 border-2 border-green-600 rounded-xl px-4 py-3.5",
+        "hover": "bg-green-50"
+      },
+      "danger": {
+        "classes": "bg-red-600 text-white rounded-xl px-4 py-3.5",
+        "hover": "bg-red-700"
+      }
+    },
+    "input": {
+      "text": {
+        "classes": "px-4 py-3.5 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400",
+        "focus": "ring-2 ring-green-500 border-transparent",
+        "withIconLeft": "pl-12",
+        "withIconRight": "pr-12",
+        "error": "border-red-300 focus:ring-red-500"
+      },
+      "textarea": {
+        "classes": "w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 resize-none",
+        "minHeight": "min-h-24",
+        "focus": "ring-2 ring-green-500 border-transparent"
+      }
+    },
+    "card": {
+      "default": {
+        "classes": "bg-white rounded-2xl p-6 shadow-lg border border-gray-200",
+        "hover": "shadow-xl border-green-500"
+      },
+      "premium": {
+        "classes": "bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-200/50 p-8 lg:p-12",
+        "blur": "backdrop-blur-xl (40px)"
+      },
+      "feature": {
+        "classes": "bg-linear-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-200",
+        "hover": "hover:border-green-500 hover:shadow-2xl hover:-translate-y-2"
+      }
+    },
+    "modal": {
+      "backdrop": {
+        "classes": "fixed inset-0 bg-black/50 z-40"
+      },
+      "content": {
+        "classes": "fixed inset-0 flex items-center justify-center z-50",
+        "card": "bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto"
+      }
+    },
+    "badge": {
+      "primary": {
+        "classes": "inline-flex items-center space-x-2 px-4 py-2 bg-green-100 rounded-full border border-green-200",
+        "text": "text-sm font-semibold text-green-700"
+      },
+      "pill": {
+        "classes": "flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm",
+        "text": "font-medium"
+      }
+    },
+    "sidebar": {
+      "container": {
+        "classes": "fixed top-0 left-0 h-screen bg-white border-r border-gray-200 shadow-lg z-40",
+        "widthOpen": "w-64",
+        "widthCollapsed": "w-0 lg:w-20"
+      },
+      "itemActive": {
+        "classes": "bg-green-600 text-white rounded-lg px-4 py-3"
+      },
+      "itemInactive": {
+        "classes": "text-gray-700 hover:bg-gray-100 rounded-lg px-4 py-3"
+      }
+    },
+    "avatar": {
+      "classes": "h-10 w-10 rounded-full overflow-hidden bg-gray-200",
+      "image": "object-cover h-full w-full"
+    },
+    "starRating": {
+      "filled": "Star with fill-current text-yellow-500",
+      "empty": "text-gray-300",
+      "sizes": {
+        "sm": "h-4 w-4",
+        "md": "h-5 w-5",
+        "lg": "h-6 w-6"
+      }
+    }
+  },
+  "pages": {
+    "login": {
+      "layout": "2-column grid (mobile: 1 col, desktop: 2 col)",
+      "background": "linear-gradient (from-slate-50 via-blue-50 to-green-50)",
+      "card": "bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl",
+      "leftSection": {
+        "content": "form fields, logo, title"
+      },
+      "rightSection": {
+        "background": "linear-gradient (from-green-600 to-teal-500)",
+        "hiddenOnMobile": true,
+        "content": "features, badges"
+      }
+    },
+    "signup": {
+      "layout": "2-column grid (mobile: 1 col, desktop: 2 col)",
+      "formFields": ["fullName", "email", "password", "confirmPassword"],
+      "validations": {
+        "fullName": "min 2, max 50 chars",
+        "email": "regex validation",
+        "password": "min 8 chars, upper+lower+digit",
+        "confirmPassword": "must match password"
+      }
+    },
+    "home": {
+      "sections": [
+        {
+          "name": "Navigation",
+          "classes": "bg-white/80 backdrop-blur-md sticky top-0 z-50"
+        },
+        {
+          "name": "Hero",
+          "layout": "2-column with floating cards"
+        },
+        {
+          "name": "Features",
+          "background": "white",
+          "grid": "4-column"
+        },
+        {
+          "name": "Services",
+          "background": "linear-gradient",
+          "grid": "3-column"
+        },
+        {
+          "name": "CTA",
+          "background": "linear-gradient from-green-600 to-green-800"
+        },
+        {
+          "name": "Footer",
+          "background": "gray-900"
+        }
+      ]
+    },
+    "dashboard": {
+      "layout": "Sidebar + Main content",
+      "sidebar": {
+        "width": "w-64 (open) or w-20 (collapsed)",
+        "items": {
+          "client": ["Dashboard", "Cari Jasa", "Pesanan Saya", "Pesan"],
+          "freelancer": ["Dashboard", "Jasa Saya", "Buat Jasa", "Pesanan", "Dompet", "Pesan"]
+        }
+      }
+    }
+  },
+  "effects": {
+    "shadows": {
+      "shadow-sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+      "shadow-md": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+      "shadow-lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+      "shadow-xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+      "shadow-2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+    },
+    "blur": {
+      "backdrop-blur-sm": "4px",
+      "backdrop-blur-md": "12px",
+      "backdrop-blur-xl": "40px"
+    },
+    "hoverEffects": [
+      "shadow-xl",
+      "border-green-500",
+      "-translate-y-2",
+      "scale-105",
+      "translate-x-1",
+      "opacity-80"
+    ],
+    "transitions": {
+      "all": "300ms",
+      "colors": "300ms",
+      "transform": "300ms",
+      "opacity": "300ms"
+    },
+    "animations": [
+      "animate-spin (loading)",
+      "animate-pulse (fading)"
+    ],
+    "focusStates": {
+      "outline": "outline-none",
+      "ring": "ring-2 ring-green-500",
+      "offset": "ring-offset-2",
+      "border": "border-transparent"
+    },
+    "disabledStates": [
+      "opacity-50",
+      "cursor-not-allowed"
+    ]
+  },
+  "icons": {
+    "library": "Lucide React",
+    "navigation": ["Menu", "X", "Home", "Search", "Package", "ShoppingCart", "Wallet", "User", "LogOut", "MessageSquare"],
+    "ui": ["Eye", "EyeOff", "Mail", "Lock", "AlertCircle", "Star"],
+    "content": ["DollarSign", "Shield", "Users", "TrendingUp", "FileText", "Clock", "ArrowRight", "Plus", "Zap", "Award"],
+    "sizing": {
+      "sm": "h-4 w-4",
+      "md": "h-5 w-5 or h-6 w-6",
+      "lg": "h-7 w-7",
+      "xl": "h-8 w-8"
+    },
+    "colors": {
+      "primary": "text-green-600",
+      "secondary": "text-gray-400",
+      "white": "text-white",
+      "error": "text-red-600",
+      "success": "text-green-600",
+      "info": "text-blue-600"
+    }
+  },
+  "responsiveBreakpoints": {
+    "mobile": "default (< 640px)",
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px",
+    "2xl": "1536px",
+    "commonPatterns": {
+      "fullToTwoColumns": "grid-cols-1 lg:grid-cols-2",
+      "singleToMultiple": "md:grid-cols-2 lg:grid-cols-3 (or lg:grid-cols-4)",
+      "paddingResponsive": "p-4 sm:p-6 lg:p-8",
+      "textSizeResponsive": "text-2xl sm:text-3xl lg:text-4xl",
+      "displayToggle": {
+        "desktopOnly": "hidden lg:block",
+        "hideDesktop": "lg:hidden",
+        "mobileOnly": "block md:hidden"
+      }
+    }
+  },
+  "notes": {
+    "framework": "Tailwind CSS",
+    "blurEffect": "backdrop-blur-xl (40px) for frosted glass",
+    "gradients": "linear-to-r (right) and linear-to-br (bottom-right)",
+    "icons": "Lucide React, import per icon",
+    "approach": "Mobile-first, expand to lg breakpoint (1024px+)",
+    "brandColor": "Green (#22c55e and #16a34a)"
+  }
+}
