@@ -55,25 +55,26 @@ export const updateFreelancerProfile = async (req, res) => {
 
 export const updateClientProfile = async (req, res) => {
   try {
-    const userId = req.user._id;
-    const { businessName, businessType } = req.body;
+    const { clientType, businessName, businessType, monthlyIncome, financialGoals, riskTolerance } = req.body;
 
-    const user = await User.findByIdAndUpdate(
-      userId,
-      {
-        businessName,
-        businessType,
-        isProfileComplete: true,
-      },
-      { new: true }
-    ).select("-password");
+    const updateData = {
+      clientType,
+      isProfileComplete: true,
+    };
 
-    res.status(200).json({
-      message: "Client profile updated successfully",
-      user,
-    });
+    if (clientType === "business") {
+      updateData.businessName = businessName;
+      updateData.businessType = businessType;
+    } else if (clientType === "personal") {
+      updateData.monthlyIncome = monthlyIncome;
+      updateData.financialGoals = financialGoals;
+      updateData.riskTolerance = riskTolerance;
+    }
+
+    const user = await User.findByIdAndUpdate(req.user._id, updateData, { new: true });
+    res.json({ user });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Failed to update profile" });
   }
 };
 
