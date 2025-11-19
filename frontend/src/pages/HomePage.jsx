@@ -8,7 +8,6 @@ import {
   Zap,
   Users,
   Award,
-  CheckCircle,
   ArrowRight,
   Star,
   FileText,

@@ -62,7 +62,7 @@ export const useAuthStore = create((set, get) => ({
     toast.success("Logout berhasil!");
   },
 
-  checkAuth: async () => {
+  checkAuth: async (navigate) => {
     set({ isCheckingAuth: true });
     try {
       const token = localStorage.getItem("token");
@@ -72,7 +72,18 @@ export const useAuthStore = create((set, get) => ({
       }
 
       const res = await axiosInstance.get("/api/auth/verify");
+      const user = res.data.user;
       set({ authUser: res.data.user });
+
+      if (user?.role && user.role !== "" && user.role !== null) {
+        if (user.isProfileComplete) {
+          navigate(`/${user.role}/dashboard`);
+        } else {
+          navigate(`/${user.role}/onboarding`);
+        }
+      } else {
+        navigate("/select-role");
+      }
     } catch (error) {
       console.error("Auth check error:", error);
 
