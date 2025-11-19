@@ -18,9 +18,9 @@ const RoleSelectionPage = () => {
 
       if (role === "client") {
         if (authUser?.isProfileComplete) {
-          navigate("/client/dashboard"); // ✅ Sudah isi profile
+          navigate("/client/dashboard");
         } else {
-          navigate("/client/onboarding"); // ✅ Belum isi, ke onboarding
+          navigate("/client/onboarding");
         }
       } else if (role === "freelancer") {
         if (authUser?.isProfileComplete) {

@@ -129,19 +129,6 @@ const PublicProfilePage = () => {
                 </p>
               </div>
             </div>
-
-            {/* Contact Button for Freelancer */}
-            {user.role === "freelancer" && (
-              <div className="flex flex-col space-y-2">
-                <button
-                  onClick={() => navigate("/messages")}
-                  className="flex items-center space-x-2 bg-white text-green-600 font-semibold px-6 py-3 rounded-xl hover:bg-green-50 transition-all shadow-lg"
-                >
-                  <MessageSquare className="h-5 w-5" />
-                  <span>Kirim Pesan</span>
-                </button>
-              </div>
-            )}
           </div>
         </div>
 

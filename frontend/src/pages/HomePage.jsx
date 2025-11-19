@@ -32,7 +32,11 @@ const HomePage = () => {
         }
         // If user is a client, redirect to client dashboard
         else if (authUser.role === "client") {
-          navigate("/client/dashboard");
+          if (authUser.isProfileComplete) {
+            navigate("/client/dashboard");
+          } else {
+            navigate("/client/onboarding");
+          }
         }
         // If user is a freelancer, redirect to freelancer dashboard
         else if (authUser.role === "freelancer") {
