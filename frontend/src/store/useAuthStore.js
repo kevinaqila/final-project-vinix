@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios.js";
+import axios from "axios";
 import toast from "react-hot-toast";
 
 export const useAuthStore = create((set, get) => ({
@@ -62,7 +63,18 @@ export const useAuthStore = create((set, get) => ({
         return;
       }
 
-      const res = await axiosInstance.get("/api/auth/verify");
+      // Use direct axios call to avoid interceptor handling 401
+      const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5050";
+      const cleanBaseURL = API_BASE_URL.replace(/\/+$/, "");
+
+      const res = await axios.get(`${cleanBaseURL}/api/auth/verify`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        timeout: 10000,
+      });
+
       const user = res.data.user;
       set({ authUser: res.data.user });
 

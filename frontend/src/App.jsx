@@ -36,9 +36,10 @@ const App = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!authUser && token) {
-      checkAuth();
+      checkAuth(navigate);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
 
   // Scroll to top on route change
   useEffect(() => {
