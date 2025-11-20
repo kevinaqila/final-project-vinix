@@ -37,22 +37,18 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: res.data.user });
       toast.success("Login berhasil!");
 
-      // Role check with debug
-      setTimeout(() => {
-        const userRole = res.data.user?.role;
-
-        if (userRole && userRole !== "" && userRole !== null) {
-          navigate(`/${userRole}/dashboard`);
-        } else {
-          navigate("/select-role");
-        }
-      }, 100);
+      // Navigate langsung tanpa setTimeout
+      const userRole = res.data.user?.role;
+      if (userRole && userRole !== "" && userRole !== null) {
+        navigate(`/${userRole}/dashboard`);
+      } else {
+        navigate("/select-role");
+      }
     } catch (error) {
       const msg = error.response?.data?.message || "Email atau password salah.";
       toast.error(msg);
     } finally {
       set({ isLoggingIn: false });
-      console.log("🏁 Login process finished");
     }
   },
 
@@ -89,6 +85,14 @@ export const useAuthStore = create((set, get) => ({
 
       set({ authUser: null });
       localStorage.removeItem("token");
+
+      // Show toast error for session expired
+      toast.error("Sesi telah berakhir. Silakan login kembali.");
+
+      // Navigate to login if navigate function is provided
+      if (navigate) {
+        navigate("/login");
+      }
     } finally {
       set({ isCheckingAuth: false });
     }
