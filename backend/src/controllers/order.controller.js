@@ -7,7 +7,7 @@ export const createOrder = async (req, res) => {
     const clientId = req.user._id;
     const { serviceId, packageType, requirements } = req.body;
 
-    if (req.user.role !== 'client') {
+    if (req.user.role !== "client") {
       return res.status(403).json({ message: "Only clients can create orders" });
     }
 
@@ -39,17 +39,17 @@ export const createOrder = async (req, res) => {
       escrowAmount,
       platformFee,
       freelancerEarnings,
-      paymentStatus: 'paid',
-      status: 'pending',
+      paymentStatus: "paid",
+      status: "pending",
     });
 
     service.totalOrders += 1;
     await service.save();
 
     const populatedOrder = await Order.findById(order._id)
-      .populate('clientId', 'fullName email')
-      .populate('freelancerId', 'fullName email')
-      .populate('serviceId', 'title');
+      .populate("clientId", "fullName email")
+      .populate("freelancerId", "fullName email")
+      .populate("serviceId", "title");
 
     res.status(201).json({
       message: "Order created successfully. Payment held in escrow.",
@@ -66,19 +66,19 @@ export const getMyOrders = async (req, res) => {
     const { role } = req.query;
 
     let query = {};
-    if (role === 'client') {
+    if (role === "client") {
       query.clientId = userId;
-    } else if (role === 'freelancer') {
+    } else if (role === "freelancer") {
       query.freelancerId = userId;
     } else {
       query.$or = [{ clientId: userId }, { freelancerId: userId }];
     }
 
     const orders = await Order.find(query)
-      .populate('clientId', 'fullName email profileImage')
-      .populate('freelancerId', 'fullName email profileImage')
-      .populate('serviceId', 'title category')
-      .populate('reviewId')
+      .populate("clientId", "fullName email profileImage")
+      .populate("freelancerId", "fullName email profileImage")
+      .populate("serviceId", "title category")
+      .populate("reviewId")
       .sort({ createdAt: -1 });
 
     res.status(200).json({ orders });
@@ -93,10 +93,10 @@ export const getOrderById = async (req, res) => {
     const userId = req.user._id;
 
     const order = await Order.findById(id)
-      .populate('clientId', 'fullName email profileImage')
-      .populate('freelancerId', 'fullName email profileImage')
-      .populate('serviceId', 'title category packages')
-      .populate('reviewId');
+      .populate("clientId", "fullName email profileImage")
+      .populate("freelancerId", "fullName email profileImage")
+      .populate("serviceId", "title category packages")
+      .populate("reviewId");
 
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
@@ -120,7 +120,7 @@ export const acceptOrder = async (req, res) => {
     const { id } = req.params;
     const freelancerId = req.user._id;
 
-    if (req.user.role !== 'freelancer') {
+    if (req.user.role !== "freelancer") {
       return res.status(403).json({ message: "Only freelancers can accept orders" });
     }
 
@@ -129,11 +129,11 @@ export const acceptOrder = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    if (order.status !== 'pending') {
+    if (order.status !== "pending") {
       return res.status(400).json({ message: "Order cannot be accepted" });
     }
 
-    order.status = 'in-progress';
+    order.status = "in-progress";
     order.acceptedAt = new Date();
     await order.save();
 
@@ -151,7 +151,7 @@ export const submitWork = async (req, res) => {
     const { id } = req.params;
     const freelancerId = req.user._id;
 
-    if (req.user.role !== 'freelancer') {
+    if (req.user.role !== "freelancer") {
       return res.status(403).json({ message: "Only freelancers can submit work" });
     }
 
@@ -160,18 +160,18 @@ export const submitWork = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    if (!['in-progress', 'revision-requested'].includes(order.status)) {
+    if (!["in-progress", "revision-requested"].includes(order.status)) {
       return res.status(400).json({ message: "Order must be in progress or revision requested to submit" });
     }
 
-    order.status = 'submitted';
+    order.status = "submitted";
     order.submittedAt = new Date();
     await order.save();
 
     const populatedOrder = await Order.findById(id)
-      .populate('clientId', 'fullName email profileImage')
-      .populate('freelancerId', 'fullName email profileImage')
-      .populate('serviceId', 'title category packages');
+      .populate("clientId", "fullName email profileImage")
+      .populate("freelancerId", "fullName email profileImage")
+      .populate("serviceId", "title category packages");
 
     res.status(200).json({
       message: "Work submitted successfully",
@@ -188,7 +188,7 @@ export const requestRevision = async (req, res) => {
     const clientId = req.user._id;
     const { message } = req.body;
 
-    if (req.user.role !== 'client') {
+    if (req.user.role !== "client") {
       return res.status(403).json({ message: "Only clients can request revisions" });
     }
 
@@ -197,7 +197,7 @@ export const requestRevision = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    if (order.status !== 'submitted') {
+    if (order.status !== "submitted") {
       return res.status(400).json({ message: "Order must be submitted to request revision" });
     }
 
@@ -205,7 +205,7 @@ export const requestRevision = async (req, res) => {
       return res.status(400).json({ message: "Revision limit reached" });
     }
 
-    order.status = 'revision-requested';
+    order.status = "revision-requested";
     order.revisionCount += 1;
     order.revisionRequests.push({
       message,
@@ -214,9 +214,9 @@ export const requestRevision = async (req, res) => {
     await order.save();
 
     const populatedOrder = await Order.findById(id)
-      .populate('clientId', 'fullName email profileImage')
-      .populate('freelancerId', 'fullName email profileImage')
-      .populate('serviceId', 'title category packages');
+      .populate("clientId", "fullName email profileImage")
+      .populate("freelancerId", "fullName email profileImage")
+      .populate("serviceId", "title category packages");
 
     res.status(200).json({
       message: "Revision requested",
@@ -232,7 +232,7 @@ export const approveOrder = async (req, res) => {
     const { id } = req.params;
     const clientId = req.user._id;
 
-    if (req.user.role !== 'client') {
+    if (req.user.role !== "client") {
       return res.status(403).json({ message: "Only clients can approve orders" });
     }
 
@@ -241,7 +241,7 @@ export const approveOrder = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    if (order.status !== 'submitted') {
+    if (order.status !== "submitted") {
       return res.status(400).json({ message: "Order must be submitted to approve" });
     }
 
@@ -249,10 +249,10 @@ export const approveOrder = async (req, res) => {
       return res.status(400).json({ message: "Payment already released" });
     }
 
-    order.status = 'completed';
+    order.status = "completed";
     order.completedAt = new Date();
     order.escrowReleased = true;
-    order.paymentStatus = 'released';
+    order.paymentStatus = "released";
     await order.save();
 
     await User.findByIdAndUpdate(order.freelancerId, {
@@ -263,9 +263,9 @@ export const approveOrder = async (req, res) => {
     });
 
     const populatedOrder = await Order.findById(id)
-      .populate('clientId', 'fullName email profileImage')
-      .populate('freelancerId', 'fullName email profileImage')
-      .populate('serviceId', 'title category packages');
+      .populate("clientId", "fullName email profileImage")
+      .populate("freelancerId", "fullName email profileImage")
+      .populate("serviceId", "title category packages");
 
     res.status(200).json({
       message: "Payment released to freelancer",
@@ -282,47 +282,73 @@ export const uploadOrderFiles = async (req, res) => {
     const userId = req.user._id;
     const files = req.files;
 
+    console.log("Upload order files request:", {
+      orderId: id,
+      userId,
+      filesCount: files ? files.length : 0,
+      files: files
+        ? files.map((f) => ({
+            originalname: f.originalname,
+            filename: f.filename,
+            path: f.path,
+            url: f.path || f.url,
+          }))
+        : [],
+    });
+
     if (!files || files.length === 0) {
+      console.log("No files uploaded");
       return res.status(400).json({ message: "No files uploaded" });
     }
 
     const order = await Order.findById(id);
     if (!order) {
+      console.log("Order not found:", id);
       return res.status(404).json({ message: "Order not found" });
     }
 
-    if (
-      order.clientId.toString() !== userId.toString() &&
-      order.freelancerId.toString() !== userId.toString()
-    ) {
+    console.log("Order found:", {
+      orderId: order._id,
+      clientId: order.clientId,
+      freelancerId: order.freelancerId,
+      userId,
+    });
+
+    if (order.clientId.toString() !== userId.toString() && order.freelancerId.toString() !== userId.toString()) {
+      console.log("Unauthorized access attempt");
       return res.status(403).json({ message: "Unauthorized" });
     }
 
     const uploadedFiles = files.map((file) => ({
       filename: file.originalname,
-      url: `/uploads/${file.filename}`,
+      url: file.path || `/uploads/${file.filename}`, // Use Cloudinary URL in production, local path in development
       uploadedAt: new Date(),
     }));
 
     if (order.clientId.toString() === userId.toString()) {
       order.clientFiles.push(...uploadedFiles);
+      console.log("Added files to clientFiles");
     } else {
       order.freelancerFiles.push(...uploadedFiles);
+      console.log("Added files to freelancerFiles");
     }
 
     await order.save();
+    console.log("Order saved successfully");
 
     const populatedOrder = await Order.findById(id)
-      .populate('clientId', 'fullName email profileImage')
-      .populate('freelancerId', 'fullName email profileImage')
-      .populate('serviceId', 'title category packages');
+      .populate("clientId", "fullName email profileImage")
+      .populate("freelancerId", "fullName email profileImage")
+      .populate("serviceId", "title category packages");
 
+    console.log("Upload completed successfully");
     res.status(200).json({
       message: "Files uploaded successfully",
       files: uploadedFiles,
       order: populatedOrder,
     });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Upload order files error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };

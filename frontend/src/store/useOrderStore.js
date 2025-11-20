@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { axiosInstance } from '../lib/axios.js';
+import { create } from "zustand";
+import { axiosInstance } from "../lib/axios.js";
 
 export const useOrderStore = create((set, get) => ({
   orders: [],
@@ -10,11 +10,11 @@ export const useOrderStore = create((set, get) => ({
   createOrder: async (orderData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.post('/api/orders', orderData);
+      const res = await axiosInstance.post("/api/orders", orderData);
       set({ isLoading: false });
       return res.data;
     } catch (error) {
-      set({ error: error.response?.data?.message || 'Failed to create order', isLoading: false });
+      set({ error: error.response?.data?.message || "Failed to create order", isLoading: false });
       throw error;
     }
   },
@@ -22,11 +22,11 @@ export const useOrderStore = create((set, get) => ({
   fetchMyOrders: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axiosInstance.get('/api/orders/my-orders');
+      const res = await axiosInstance.get("/api/orders/my-orders");
       set({ orders: res.data.orders, isLoading: false });
       return res.data;
     } catch (error) {
-      set({ error: error.response?.data?.message || 'Failed to fetch orders', isLoading: false });
+      set({ error: error.response?.data?.message || "Failed to fetch orders", isLoading: false });
       throw error;
     }
   },
@@ -38,7 +38,7 @@ export const useOrderStore = create((set, get) => ({
       set({ selectedOrder: res.data.order, isLoading: false });
       return res.data;
     } catch (error) {
-      set({ error: error.response?.data?.message || 'Failed to fetch order', isLoading: false });
+      set({ error: error.response?.data?.message || "Failed to fetch order", isLoading: false });
       throw error;
     }
   },
@@ -54,7 +54,7 @@ export const useOrderStore = create((set, get) => ({
       });
       return res.data;
     } catch (error) {
-      set({ error: error.response?.data?.message || 'Failed to accept order', isLoading: false });
+      set({ error: error.response?.data?.message || "Failed to accept order", isLoading: false });
       throw error;
     }
   },
@@ -70,7 +70,7 @@ export const useOrderStore = create((set, get) => ({
       });
       return res.data;
     } catch (error) {
-      set({ error: error.response?.data?.message || 'Failed to submit work', isLoading: false });
+      set({ error: error.response?.data?.message || "Failed to submit work", isLoading: false });
       throw error;
     }
   },
@@ -86,7 +86,7 @@ export const useOrderStore = create((set, get) => ({
       });
       return res.data;
     } catch (error) {
-      set({ error: error.response?.data?.message || 'Failed to request revision', isLoading: false });
+      set({ error: error.response?.data?.message || "Failed to request revision", isLoading: false });
       throw error;
     }
   },
@@ -102,7 +102,7 @@ export const useOrderStore = create((set, get) => ({
       });
       return res.data;
     } catch (error) {
-      set({ error: error.response?.data?.message || 'Failed to approve order', isLoading: false });
+      set({ error: error.response?.data?.message || "Failed to approve order", isLoading: false });
       throw error;
     }
   },
@@ -112,16 +112,16 @@ export const useOrderStore = create((set, get) => ({
     try {
       const formData = new FormData();
       files.forEach((file) => {
-        formData.append('files', file);
+        formData.append("files", file);
       });
 
       const res = await axiosInstance.post(`/api/orders/${id}/upload`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { "Content-Type": "multipart/form-data" },
       });
       set({ selectedOrder: res.data.order, isLoading: false });
       return res.data;
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Failed to upload files';
+      const errorMessage = error.response?.data?.message || "Failed to upload files";
       set({ error: errorMessage, isLoading: false });
       // Don't throw error to prevent double toast from axios interceptor
       return { error: errorMessage };

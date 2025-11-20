@@ -24,14 +24,16 @@ export const uploadOrderFiles = multer({
   },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [
-      'image/jpeg', 'image/png', 'image/jpg',
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'application/vnd.ms-excel',
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      'text/plain',
-      'application/zip'
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "text/plain",
+      "application/zip",
     ];
 
     if (allowedMimes.includes(file.mimetype)) {

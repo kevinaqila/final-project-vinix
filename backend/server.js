@@ -24,7 +24,7 @@ const io = new Server(server, {
       process.env.NODE_ENV === "production"
         ? ["https://final-project-vinix7.vercel.app", "https://vinix-backend.vercel.app"]
         : "http://localhost:5173",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   },
 });
 
@@ -38,7 +38,7 @@ const corsOptions = {
       ? ["https://final-project-vinix7.vercel.app", "https://vinix-backend.vercel.app"]
       : "http://localhost:5173",
   credentials: true, // ✅ Enable credentials for auth
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"], // ✅ Add more headers
   optionsSuccessStatus: 200,
 };
