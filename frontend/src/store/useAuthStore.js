@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios.js";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export const useAuthStore = create((set, get) => ({
+export const useAuthStore = create((set) => ({
   authUser: null,
   isSigningUp: false,
   isLoggingIn: false,
@@ -14,7 +14,7 @@ export const useAuthStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/api/auth/signup", data);
       localStorage.setItem("token", res.data.token);
-      await get().checkAuth();
+      set({ authUser: res.data.user });
       toast.success("Akun berhasil dibuat!");
     } catch (error) {
       const msg = error.response?.data?.message || "Gagal membuat akun. Silakan coba lagi.";
