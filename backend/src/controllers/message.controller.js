@@ -4,23 +4,16 @@ import Order from "../models/order.model.js";
 export const getOrderMessages = async (req, res) => {
   try {
     const { orderId } = req.params;
-    const userId = req.user._id;
-
-    console.log('Get order messages request:', { orderId, userId });
 
     const order = await Order.findById(orderId);
     if (!order) {
-      console.log('Order not found for messages:', orderId);
       return res.status(404).json({ message: "Order not found" });
     }
 
-    const isClient = order.clientId.toString() === userId.toString();
-    const isFreelancer = order.freelancerId.toString() === userId.toString();
-
-    console.log('User authorization check:', { isClient, isFreelancer, clientId: order.clientId, freelancerId: order.freelancerId });
+    const isClient = order.clientId.toString() === req.user._id.toString();
+    const isFreelancer = order.freelancerId.toString() === req.user._id.toString();
 
     if (!isClient && !isFreelancer) {
-      console.log('Unauthorized access to messages');
       return res.status(403).json({ message: "Not authorized to view these messages" });
     }
 
@@ -29,12 +22,10 @@ export const getOrderMessages = async (req, res) => {
       .populate("receiverId", "fullName email profileImage")
       .sort({ createdAt: 1 });
 
-    console.log('Found messages:', messages.length);
-
     await Message.updateMany(
       {
         orderId,
-        receiverId: userId,
+        receiverId: req.user._id,
         isRead: false,
       },
       {
@@ -45,7 +36,6 @@ export const getOrderMessages = async (req, res) => {
 
     res.status(200).json(messages);
   } catch (error) {
-    console.error('Get order messages error:', error);
     res.status(500).json({ message: "Server error" });
   }
 };

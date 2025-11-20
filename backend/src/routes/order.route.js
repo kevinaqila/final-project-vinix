@@ -1,6 +1,6 @@
 import express from 'express';
 import { protectRoute } from '../middleware/auth.middleware.js';
-import { upload, uploadOrderFiles } from '../middleware/upload.middleware.js';
+import { upload, uploadOrderFiles as uploadOrderFilesMiddleware } from '../middleware/upload.middleware.js';
 import {
     createOrder,
     getMyOrders,
@@ -20,7 +20,7 @@ router.use(protectRoute);
 // Specific routes MUST come before parameterized routes
 router.post('/', createOrder);
 router.get('/my-orders', getMyOrders); // Must be before /:id
-router.post('/:id/upload', uploadOrderFiles.array('files', 5), uploadOrderFiles);
+router.post('/:id/upload', uploadOrderFilesMiddleware.array('files', 5), uploadOrderFiles);
 router.put('/:id/accept', acceptOrder);
 router.put('/:id/submit', submitWork);
 router.put('/:id/revision', requestRevision);
