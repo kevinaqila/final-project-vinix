@@ -25,9 +25,33 @@ export const updateFreelancerProfile = async (req, res) => {
     const userId = req.user._id;
     const { education, skills, bio, certifications, experience } = req.body;
 
-    if (!education || !skills || !bio) {
+    console.log("Update freelancer profile request:", {
+      userId,
+      education: !!education,
+      skills: !!skills,
+      bio: !!bio,
+      hasCertifications: !!certifications,
+      hasExperience: !!experience,
+    });
+
+    if (!education || !Array.isArray(education) || education.length === 0 || !education.some((e) => e.trim())) {
+      console.log("Validation failed - education required");
       return res.status(400).json({
-        message: "Education, skills, and bio are required",
+        message: "Education is required",
+      });
+    }
+
+    if (!skills || !Array.isArray(skills) || skills.length === 0 || !skills.some((s) => s.trim())) {
+      console.log("Validation failed - skills required");
+      return res.status(400).json({
+        message: "Skills are required",
+      });
+    }
+
+    if (!bio || !bio.trim()) {
+      console.log("Validation failed - bio required");
+      return res.status(400).json({
+        message: "Bio is required",
       });
     }
 
@@ -44,11 +68,17 @@ export const updateFreelancerProfile = async (req, res) => {
       { new: true }
     ).select("-password");
 
+    console.log("Freelancer profile updated successfully:", {
+      userId,
+      isProfileComplete: user.isProfileComplete,
+    });
+
     res.status(200).json({
       message: "Freelancer profile updated successfully",
       user,
     });
   } catch (error) {
+    console.error("Update freelancer profile error:", error);
     res.status(500).json({ message: "Server error" });
   }
 };

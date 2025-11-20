@@ -32,6 +32,7 @@ export const signup = async (req, res) => {
         fullName: newUser.fullName,
         role: newUser.role,
         profileImage: newUser.profileImage,
+        isProfileComplete: newUser.isProfileComplete, // Tambah ini
       },
     });
   } catch (error) {
@@ -63,6 +64,7 @@ export const login = async (req, res) => {
         fullName: user.fullName,
         role: user.role,
         profileImage: user.profileImage,
+        isProfileComplete: user.isProfileComplete, // Tambah ini
       },
     });
   } catch (error) {

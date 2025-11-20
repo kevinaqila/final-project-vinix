@@ -92,10 +92,42 @@ const FreelancerOnboardingPage = () => {
     setIsSubmitting(true);
 
     try {
-      await updateFreelancerProfile(formData);
+      // Validate required fields
+      if (!formData.bio.trim()) {
+        alert("Deskripsi singkat wajib diisi");
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!formData.education.some((edu) => edu.trim())) {
+        alert("Minimal satu pendidikan wajib diisi");
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!formData.skills.some((skill) => skill.trim())) {
+        alert("Minimal satu keahlian wajib diisi");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Clean up empty entries
+      const cleanData = {
+        ...formData,
+        education: formData.education.filter((edu) => edu.trim()),
+        skills: formData.skills.filter((skill) => skill.trim()),
+        certifications: formData.certifications.filter((cert) => cert.name.trim() || cert.issuer.trim()),
+        experience: formData.experience.filter((exp) => exp.title.trim()),
+      };
+
+      console.log("Submitting freelancer profile:", cleanData);
+
+      await updateFreelancerProfile(cleanData);
 
       navigate("/freelancer/dashboard");
-    } catch {
+    } catch (error) {
+      console.error("Failed to update freelancer profile:", error);
+      alert("Gagal menyimpan profil. Silakan coba lagi.");
       setIsSubmitting(false);
     }
   };
