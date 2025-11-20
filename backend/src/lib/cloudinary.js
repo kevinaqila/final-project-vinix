@@ -16,4 +16,13 @@ export const storage = new CloudinaryStorage({
   },
 });
 
+export const orderFileStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "order-files",
+    allowed_formats: ["jpg", "png", "jpeg", "pdf", "doc", "docx", "xls", "xlsx", "txt", "zip"],
+    resource_type: "auto", // Allow both images and raw files
+  },
+});
+
 export default cloudinary;

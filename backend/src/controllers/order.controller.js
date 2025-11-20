@@ -286,7 +286,12 @@ export const uploadOrderFiles = async (req, res) => {
       orderId: id,
       userId,
       filesCount: files ? files.length : 0,
-      files: files ? files.map(f => ({ originalname: f.originalname, filename: f.filename })) : []
+      files: files ? files.map(f => ({
+        originalname: f.originalname,
+        filename: f.filename,
+        path: f.path,
+        url: f.path || f.url
+      })) : []
     });
 
     if (!files || files.length === 0) {
@@ -317,7 +322,7 @@ export const uploadOrderFiles = async (req, res) => {
 
     const uploadedFiles = files.map((file) => ({
       filename: file.originalname,
-      url: `/uploads/${file.filename}`,
+      url: file.path || `/uploads/${file.filename}`, // Use Cloudinary URL in production, local path in development
       uploadedAt: new Date(),
     }));
 
