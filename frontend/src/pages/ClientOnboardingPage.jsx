@@ -106,11 +106,11 @@ const ClientOnboardingPage = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 >
                   <option value="">Pilih tipe bisnis</option>
-                  <option value="startup">Startup</option>
-                  <option value="corporate">Corporate</option>
-                  <option value="consulting">Consulting</option>
-                  <option value="finance">Finance</option>
-                  <option value="other">Other</option>
+                  <option value="Startup">Startup</option>
+                  <option value="Corporate">Corporate</option>
+                  <option value="Consulting">Consulting</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
             </>
