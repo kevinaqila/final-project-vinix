@@ -161,7 +161,12 @@ const OrderDetailPage = () => {
 
     setUploading(true);
     try {
-      await uploadOrderFiles(id, files);
+      const result = await uploadOrderFiles(id, files);
+
+      if (result.error) {
+        toast.error(result.error);
+        return;
+      }
 
       if (isFreelancer) {
         await submitWork(id);

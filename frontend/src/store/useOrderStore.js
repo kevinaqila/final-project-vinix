@@ -121,8 +121,10 @@ export const useOrderStore = create((set, get) => ({
       set({ selectedOrder: res.data.order, isLoading: false });
       return res.data;
     } catch (error) {
-      set({ error: error.response?.data?.message || 'Failed to upload files', isLoading: false });
-      throw error;
+      const errorMessage = error.response?.data?.message || 'Failed to upload files';
+      set({ error: errorMessage, isLoading: false });
+      // Don't throw error to prevent double toast from axios interceptor
+      return { error: errorMessage };
     }
   },
 
