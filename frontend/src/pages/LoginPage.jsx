@@ -15,16 +15,41 @@ const LoginPage = () => {
   });
 
   useEffect(() => {
-    if (authUser) {
-      // Redirect to the intended destination or home
-      const from = location.state?.from?.pathname || "/";
-      navigate(from, { replace: true });
+    // Only redirect if user is already authenticated and on login page
+    if (authUser && (location.pathname === "/login" || location.pathname === "/signup")) {
+      const userRole = authUser.role;
+      if (userRole && userRole !== "" && userRole !== null) {
+        if (authUser.isProfileComplete) {
+          navigate(`/${userRole}/dashboard`, { replace: true });
+        } else {
+          navigate(`/${userRole}/onboarding`, { replace: true });
+        }
+      } else {
+        navigate("/select-role", { replace: true });
+      }
     }
-  }, [authUser, navigate, location]);
+  }, [authUser, navigate, location.pathname]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(formData);
+    try {
+      const result = await login(formData);
+
+      // Handle navigation based on user role
+      const userRole = result.user?.role;
+      if (userRole && userRole !== "" && userRole !== null) {
+        if (result.user.isProfileComplete) {
+          navigate(`/${userRole}/dashboard`);
+        } else {
+          navigate(`/${userRole}/onboarding`);
+        }
+      } else {
+        navigate("/select-role");
+      }
+    } catch (error) {
+      // Error toast already shown by login function
+      console.error("Login failed:", error);
+    }
   };
 
   return (

@@ -23,7 +23,7 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  login: async (data, navigate) => {
+  login: async (data) => {
     set({ isLoggingIn: true });
 
     try {
@@ -37,16 +37,11 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: res.data.user });
       toast.success("Login berhasil!");
 
-      // Navigate langsung tanpa setTimeout
-      const userRole = res.data.user?.role;
-      if (userRole && userRole !== "" && userRole !== null) {
-        navigate(`/${userRole}/dashboard`);
-      } else {
-        navigate("/select-role");
-      }
+      return res.data; // Return data so component can handle navigation
     } catch (error) {
       const msg = error.response?.data?.message || "Email atau password salah.";
       toast.error(msg);
+      throw error; // Re-throw so component can handle it
     } finally {
       set({ isLoggingIn: false });
     }
