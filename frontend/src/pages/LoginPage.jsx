@@ -25,7 +25,7 @@ const LoginPage = () => {
           navigate(`/${userRole}/onboarding`, { replace: true });
         }
       } else {
-        navigate("/select-role", { replace: true });
+        navigate("/role-selection", { replace: true });
       }
     }
   }, [authUser, navigate, location.pathname]);
@@ -44,7 +44,7 @@ const LoginPage = () => {
           navigate(`/${userRole}/onboarding`);
         }
       } else {
-        navigate("/select-role");
+        navigate("/role-selection");
       }
     } catch (error) {
       // Error toast already shown by login function
