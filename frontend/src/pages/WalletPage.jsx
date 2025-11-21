@@ -82,11 +82,11 @@ const WalletPage = () => {
     const diffHours = Math.floor(diffMins / 60);
 
     if (diffHours > 0) {
-      return `Auto-complete dalam ${diffHours} jam ${diffMins % 60} menit`;
+      return `Sedang diproses dalam ${diffHours} jam ${diffMins % 60} menit`;
     } else if (diffMins > 0) {
-      return `Auto-complete dalam ${diffMins} menit`;
+      return `Sedang diproses dalam ${diffMins} menit`;
     } else {
-      return "Auto-complete dalam beberapa detik";
+      return "Sedang diproses dalam beberapa detik";
     }
   };
 

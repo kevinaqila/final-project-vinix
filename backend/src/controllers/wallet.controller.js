@@ -257,25 +257,13 @@ export const processWithdrawal = async (req, res) => {
 // Auto-complete withdrawals yang sudah melewati autoCompleteAt time
 export const autoCompleteWithdrawals = async (req, res) => {
   try {
-    // Debug logging
-    console.log('🔍 Auto-complete request received');
-    console.log('Headers received:', req.headers);
-    console.log('x-cron-secret header:', req.headers['x-cron-secret']);
-
     // Protect dengan secret key
     const secretKey = process.env.CRON_SECRET_KEY;
     const providedKey = req.headers["x-cron-secret"];
 
-    console.log('CRON_SECRET_KEY from env:', secretKey);
-    console.log('Provided key:', providedKey);
-    console.log('Keys match:', secretKey === providedKey);
-
     if (!secretKey || providedKey !== secretKey) {
-      console.log('❌ Authentication failed');
       return res.status(401).json({ message: "Unauthorized" });
     }
-
-    console.log('✅ Authentication successful');
 
     const now = new Date();
 
