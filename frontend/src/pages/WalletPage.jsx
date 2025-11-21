@@ -59,12 +59,48 @@ const WalletPage = () => {
     }).format(amount);
   };
 
-  const formatDate = (date) => {
-    return new Date(date).toLocaleDateString("id-ID", {
+  const formatDateTime = (date) => {
+    return new Date(date).toLocaleString("id-ID", {
       year: "numeric",
-      month: "long",
+      month: "short",
       day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
+  };
+
+  const getTimeUntilAutoComplete = (autoCompleteAt) => {
+    if (!autoCompleteAt) return null;
+
+    const now = new Date();
+    const autoCompleteTime = new Date(autoCompleteAt);
+    const diffMs = autoCompleteTime - now;
+
+    if (diffMs <= 0) return "Sedang diproses...";
+
+    const diffMins = Math.floor(diffMs / (1000 * 60));
+    const diffHours = Math.floor(diffMins / 60);
+
+    if (diffHours > 0) {
+      return `Auto-complete dalam ${diffHours} jam ${diffMins % 60} menit`;
+    } else if (diffMins > 0) {
+      return `Auto-complete dalam ${diffMins} menit`;
+    } else {
+      return "Auto-complete dalam beberapa detik";
+    }
+  };
+
+  const ADMIN_FEE = 7000;
+
+  const calculateEstimate = () => {
+    const amount = parseInt(withdrawAmount) || 0;
+    const totalDeduction = amount + ADMIN_FEE;
+    const remainingBalance = availableBalance - totalDeduction;
+    return {
+      amount,
+      totalDeduction,
+      remainingBalance: Math.max(0, remainingBalance),
+    };
   };
 
   const handleWithdraw = async (e) => {
@@ -82,8 +118,8 @@ const WalletPage = () => {
       return;
     }
 
-    if (amount > availableBalance) {
-      toast.error("Saldo tidak mencukupi");
+    if (amount + ADMIN_FEE > availableBalance) {
+      toast.error(`Saldo tidak mencukupi. Diperlukan Rp ${amount + ADMIN_FEE} (termasuk biaya admin Rp ${ADMIN_FEE})`);
       return;
     }
 
@@ -251,6 +287,37 @@ const WalletPage = () => {
                     <p className="text-xs text-green-600 mt-2 font-medium">Minimal Rp 100.000</p>
                   </div>
 
+                  {/* Estimation Box */}
+                  {withdrawAmount && (
+                    <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
+                      <p className="text-xs font-bold text-blue-600 mb-3">📊 ESTIMASI SISA SALDO</p>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Saldo Tersedia:</span>
+                          <span className="text-sm font-bold text-gray-900">{formatCurrency(availableBalance)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Jumlah Tarik:</span>
+                          <span className="text-sm font-bold text-red-600">
+                            - {formatCurrency(calculateEstimate().amount)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Biaya Admin:</span>
+                          <span className="text-sm font-bold text-red-600">- {formatCurrency(ADMIN_FEE)}</span>
+                        </div>
+                        <div className="border-t border-blue-200 pt-2 mt-2">
+                          <div className="flex justify-between">
+                            <span className="text-sm font-bold text-gray-900">Sisa Saldo:</span>
+                            <span className="text-sm font-bold text-blue-600">
+                              {formatCurrency(calculateEstimate().remainingBalance)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="pt-6 border-t-2 border-green-100">
                     <h3 className="font-bold text-gray-900 mb-4 text-lg flex items-center gap-2">
                       <span>🏦</span> Informasi Rekening
@@ -304,7 +371,7 @@ const WalletPage = () => {
                     disabled={isSubmitting}
                     className="w-full py-4 bg-linear-to-r from-green-600 via-green-600 to-emerald-600 text-white font-bold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all shadow-2xl shadow-green-500/50 hover:shadow-green-500/70 transform hover:-translate-y-1 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed disabled:shadow-none disabled:transform-none"
                   >
-                    {isSubmitting ? "⏳ Memproses..." : "✅ Ajukan Penarikan"}
+                    {isSubmitting ? "Memproses..." : "Ajukan Penarikan"}
                   </button>
 
                   <p className="text-xs text-green-600 text-center font-medium">
@@ -334,16 +401,16 @@ const WalletPage = () => {
                   <div className="flex items-start space-x-3">
                     <span className="text-blue-600 font-bold mt-1">✓</span>
                     <div>
-                      <p className="font-semibold text-gray-900">Waktu Proses</p>
-                      <p className="text-sm text-gray-600">1-3 hari kerja setelah disetujui</p>
+                      <p className="font-semibold text-gray-900">Auto-Complete</p>
+                      <p className="text-sm text-gray-600">Penarikan otomatis selesai dalam 5 menit (testing)</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
                     <span className="text-blue-600 font-bold mt-1">✓</span>
                     <div>
-                      <p className="font-semibold text-gray-900">Biaya Admin</p>
-                      <p className="text-sm text-gray-600">Gratis, tanpa potongan</p>
+                      <p className="font-semibold text-gray-900">Waktu Proses</p>
+                      <p className="text-sm text-gray-600">Auto-complete dalam 5 menit, atau manual 1-3 hari</p>
                     </div>
                   </div>
 
@@ -356,7 +423,19 @@ const WalletPage = () => {
                   </div>
                 </div>
 
-                <div className="mt-6 p-4 bg-blue-100 rounded-xl">
+                <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+                  <p className="text-sm text-yellow-800 font-medium mb-2">
+                    ⚠️ <strong>Perhatian:</strong>
+                  </p>
+                  <p className="text-sm text-yellow-800 mb-2">
+                    Biaya admin Rp 7.000 akan langsung dipotong dari saldo Anda saat mengajukan penarikan.
+                  </p>
+                  <p className="text-sm text-yellow-800">
+                    Penarikan akan otomatis selesai dalam 5 menit tanpa perlu persetujuan manual.
+                  </p>
+                </div>
+
+                <div className="mt-4 p-4 bg-blue-100 rounded-xl">
                   <p className="text-sm text-blue-800 font-medium">
                     💡 <strong>Tips:</strong> Pastikan data rekening bank Anda akurat untuk menghindari penundaan proses
                     penarikan.
@@ -464,7 +543,19 @@ const WalletPage = () => {
                                 {item.bankName} - {item.accountNumber}
                               </p>
 
-                              <p className="text-xs text-gray-500">{formatDate(item.createdAt)}</p>
+                              <p className="text-xs text-gray-500">{formatDateTime(item.createdAt)}</p>
+
+                              {item.status === "pending" && item.autoCompleteAt && (
+                                <p className="text-xs text-blue-600 font-medium mt-1">
+                                  ⏰ {getTimeUntilAutoComplete(item.autoCompleteAt)}
+                                </p>
+                              )}
+
+                              {item.isAutoCompleted && (
+                                <p className="text-xs text-green-600 font-medium mt-1">
+                                  ✅ Auto-completed pada {formatDateTime(item.processedAt)}
+                                </p>
+                              )}
 
                               {item.notes && <p className="text-xs text-gray-500 mt-1 italic">Catatan: {item.notes}</p>}
                             </div>

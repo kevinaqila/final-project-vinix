@@ -45,6 +45,7 @@ export const getWalletBalance = async (req, res) => {
 export const requestWithdrawal = async (req, res) => {
   try {
     const { amount, bankName, accountNumber, accountName } = req.body;
+    const adminFee = 7000;
 
     if (req.user.role !== "freelancer") {
       return res.status(403).json({ message: "Only freelancers can request withdrawals" });
@@ -242,7 +243,6 @@ export const processWithdrawal = async (req, res) => {
         $inc: { walletBalance: withdrawal.adminFee || 7000 },
       });
     }
-
     await withdrawal.save();
 
     res.status(200).json({
