@@ -11,7 +11,6 @@ import reviewRoutes from "./src/routes/review.route.js";
 import walletRoutes from "./src/routes/wallet.route.js";
 import messageRoutes from "./src/routes/message.route.js";
 import { connectDB } from "./src/lib/db.js";
-import { startWithdrawalScheduler } from "./src/lib/withdrawalScheduler.js";
 
 dotenv.config();
 
@@ -37,9 +36,6 @@ const initDB = async () => {
     dbConnected = true;
   }
 };
-
-// Start withdrawal scheduler
-startWithdrawalScheduler();
 
 // CORS configuration
 const corsOptions = {
