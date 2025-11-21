@@ -36,7 +36,7 @@ const App = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!authUser && token) {
-      checkAuth(navigate);
+      checkAuth(navigate, true); // true = initial check, will navigate to dashboard
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run once on mount
