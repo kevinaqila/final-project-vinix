@@ -343,7 +343,7 @@ const WalletPage = () => {
                     <span className="text-blue-600 font-bold mt-1">✓</span>
                     <div>
                       <p className="font-semibold text-gray-900">Biaya Admin</p>
-                      <p className="text-sm text-gray-600">Gratis, tanpa potongan</p>
+                      <p className="text-sm text-gray-600">Rp 7.000 - Setiap pengajuan transaksi</p>
                     </div>
                   </div>
 

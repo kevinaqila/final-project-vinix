@@ -45,6 +45,7 @@ export const getWalletBalance = async (req, res) => {
 export const requestWithdrawal = async (req, res) => {
   try {
     const { amount, bankName, accountNumber, accountName } = req.body;
+    const adminFee = 7000;
 
     if (req.user.role !== 'freelancer') {
       return res.status(403).json({ message: "Only freelancers can request withdrawals" });
@@ -82,9 +83,13 @@ export const requestWithdrawal = async (req, res) => {
     const pendingAmount = pendingWithdrawals.length > 0 ? pendingWithdrawals[0].total : 0;
     const availableBalance = user.walletBalance - pendingAmount;
 
-    if (amount > availableBalance) {
-      return res.status(400).json({ message: "Insufficient balance" });
+    if (amount + adminFee > availableBalance) {
+      return res.status(400).json({ message: "Insufficient balance including admin fee" });
     }
+
+    await User.findByIdAndUpdate(req.user._id, {
+      $inc: { walletBalance: -(amount + adminFee) },
+    });
 
     const withdrawal = new Withdrawal({
       freelancerId: req.user._id,
@@ -176,12 +181,6 @@ export const processWithdrawal = async (req, res) => {
     withdrawal.notes = notes;
     withdrawal.processedAt = new Date();
     withdrawal.processedBy = req.user._id;
-
-    if (status === 'completed') {
-      await User.findByIdAndUpdate(withdrawal.freelancerId, {
-        $inc: { walletBalance: -withdrawal.amount },
-      });
-    }
 
     await withdrawal.save();
 
