@@ -3,8 +3,8 @@
 /* Custom scrollbar utilities */
 .scrollbar-hide {
   -ms-overflow-style: none; /* Internet Explorer 10+ */
-  /* stylelint-disable-next-line */
-  scrollbar-width: none; /* Firefox */
+  /* stylelint-disable-next-line property-no-unknown */
+  scrollbar-width: none; /* Firefox - supported in modern versions */
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Safari and Chrome */

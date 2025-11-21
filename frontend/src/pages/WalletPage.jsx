@@ -280,6 +280,7 @@ const WalletPage = () => {
                         type="number"
                         value={withdrawAmount}
                         onChange={(e) => setWithdrawAmount(e.target.value)}
+                        onWheel={(e) => e.target.blur()} // Prevent scroll from changing value
                         placeholder="0"
                         className="w-full pl-12 pr-4 py-4 border-2 border-green-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/30 focus:border-green-500 text-gray-900 font-bold text-lg placeholder-gray-400 bg-green-50/50 transition-all"
                       />
