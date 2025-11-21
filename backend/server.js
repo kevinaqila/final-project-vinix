@@ -10,6 +10,7 @@ import orderRoutes from "./src/routes/order.route.js";
 import reviewRoutes from "./src/routes/review.route.js";
 import walletRoutes from "./src/routes/wallet.route.js";
 import messageRoutes from "./src/routes/message.route.js";
+import cronRoutes from "./src/routes/cron.route.js";
 import { connectDB } from "./src/lib/db.js";
 
 dotenv.config();
@@ -62,6 +63,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/wallet", walletRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/cron", cronRoutes);
 
 // Socket handlers
 io.on("connection", (socket) => {
