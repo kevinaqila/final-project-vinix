@@ -1,11 +1,12 @@
 import express from "express";
 import { protectRoute } from "../middleware/auth.middleware.js";
 import {
-    getWalletBalance,
-    requestWithdrawal,
-    getWithdrawalHistory,
-    cancelWithdrawal,
-    processWithdrawal,
+  getWalletBalance,
+  requestWithdrawal,
+  getWithdrawalHistory,
+  cancelWithdrawal,
+  processWithdrawal,
+  autoCompleteWithdrawals,
 } from "../controllers/wallet.controller.js";
 
 const router = express.Router();
@@ -27,5 +28,9 @@ router.patch("/cancel/:id", cancelWithdrawal);
 
 // Process withdrawal (admin)
 router.patch("/process/:id", processWithdrawal);
+
+// Auto-complete withdrawals (protected dengan secret key)
+// Bisa di-trigger dari external cron service seperti EasyCron
+router.post("/auto-complete", autoCompleteWithdrawals);
 
 export default router;
