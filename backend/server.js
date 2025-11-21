@@ -28,8 +28,14 @@ const io = new Server(server, {
   },
 });
 
-// Connect to database
-connectDB();
+// Connect to database - Initialize once
+let dbConnected = false;
+const initDB = async () => {
+  if (!dbConnected) {
+    await connectDB();
+    dbConnected = true;
+  }
+};
 
 // CORS configuration
 const corsOptions = {
@@ -75,7 +81,10 @@ io.on("connection", (socket) => {
 });
 
 // Vercel serverless function export
-export default (req, res) => {
+export default async (req, res) => {
+  // Initialize database on first request
+  await initDB();
+
   // Handle API routes
   if (req.url.startsWith("/api/")) {
     return app(req, res);
