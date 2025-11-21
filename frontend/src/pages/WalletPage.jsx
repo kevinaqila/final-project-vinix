@@ -376,7 +376,7 @@ const WalletPage = () => {
                   </button>
 
                   <p className="text-xs text-green-600 text-center font-medium">
-                    Dana akan diproses dalam 1-3 hari kerja
+                    Dana akan diproses dalam waktu kurang dari 5 menit
                   </p>
                 </form>
               </div>
