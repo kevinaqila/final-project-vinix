@@ -79,7 +79,7 @@ const Sidebar = () => {
       </button>
 
       {/* Overlay for mobile */}
-      {isOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden" onClick={toggleSidebar} />}
+      {isOpen && <div className="fixed inset-0 bg-gray-900/30 z-30 lg:hidden" onClick={toggleSidebar} />}
 
       {/* Sidebar */}
       <aside
