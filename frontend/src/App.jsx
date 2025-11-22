@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 
 import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import RoleSelectionPage from "./pages/RoleSelectionPage";
@@ -91,13 +92,14 @@ const App = () => {
       />
       <div>
         <Routes>
-          {/* Public Routes */}
+          {/* Public Routes - Landing Page */}
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/dashboard" element={<DashboardRedirect />} />
             <Route path="/role-selection" element={<RoleSelectionPage />} />
 
