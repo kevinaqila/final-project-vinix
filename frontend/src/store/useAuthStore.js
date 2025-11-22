@@ -55,10 +55,12 @@ export const useAuthStore = create((set) => ({
   },
 
   checkAuth: async (navigate) => {
+    console.log('🔍 checkAuth called, current location:', window.location.pathname);
     set({ isCheckingAuth: true });
     try {
       const token = localStorage.getItem("token");
       if (!token) {
+        console.log('❌ No token found');
         set({ authUser: null, isCheckingAuth: false });
         return;
       }
@@ -76,15 +78,20 @@ export const useAuthStore = create((set) => ({
       });
 
       const user = res.data.user;
+      console.log('✅ Auth successful, user:', user);
       set({ authUser: res.data.user });
 
       // Only navigate if user role is not set or profile is incomplete
       if (user?.role && user.role !== "" && user.role !== null) {
         if (!user.isProfileComplete) {
+          console.log('📝 Profile incomplete, navigating to onboarding');
           navigate(`/${user.role}/onboarding`);
+        } else {
+          console.log('✅ Profile complete, staying on current page');
+          // If role is set and profile is complete, don't navigate - stay on current page
         }
-        // If role is set and profile is complete, don't navigate - stay on current page
       } else {
+        console.log('🎭 No role set, navigating to role selection');
         // Only navigate to role selection if no role set
         navigate("/select-role");
       }
