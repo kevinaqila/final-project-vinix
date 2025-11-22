@@ -12,10 +12,12 @@ import {
   Award,
   MessageSquare,
   Wallet,
+  Menu,
+  X,
 } from "lucide-react";
 
 const LandingPage = () => {
-  const [email, setEmail] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Smooth scroll function
   const smoothScrollTo = (targetId) => {
@@ -24,7 +26,7 @@ const LandingPage = () => {
       const offsetTop = element.offsetTop - 80; // Account for fixed navbar height
       window.scrollTo({
         top: offsetTop,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -33,6 +35,7 @@ const LandingPage = () => {
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
     smoothScrollTo(targetId);
+    setMobileMenuOpen(false); // Close mobile menu after click
   };
 
   const features = [
@@ -123,36 +126,112 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="bg-white" style={{ scrollBehavior: 'smooth' }}>
+    <div className="bg-white" style={{ scrollBehavior: "smooth" }}>
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <img src="/images/vertical-logo.png" alt="FinancePro" className="h-10" />
+            <img
+              src="/images/horizontal-logo.png"
+              alt="FinancePro"
+              className="h-10 cursor-pointer"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            />
           </div>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" onClick={(e) => handleNavClick(e, 'features')} className="text-gray-600 hover:text-gray-900 transition cursor-pointer">
+            <a
+              href="#features"
+              onClick={(e) => handleNavClick(e, "features")}
+              className="text-gray-600 hover:text-gray-900 transition cursor-pointer"
+            >
               Fitur
             </a>
-            <a href="#benefits" onClick={(e) => handleNavClick(e, 'benefits')} className="text-gray-600 hover:text-gray-900 transition cursor-pointer">
+            <a
+              href="#benefits"
+              onClick={(e) => handleNavClick(e, "benefits")}
+              className="text-gray-600 hover:text-gray-900 transition cursor-pointer"
+            >
               Manfaat
             </a>
-            <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')} className="text-gray-600 hover:text-gray-900 transition cursor-pointer">
+            <a
+              href="#testimonials"
+              onClick={(e) => handleNavClick(e, "testimonials")}
+              className="text-gray-600 hover:text-gray-900 transition cursor-pointer"
+            >
               Testimoni
             </a>
           </div>
-          <div className="flex items-center space-x-4">
+
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
             <Link to="/login" className="text-gray-600 hover:text-gray-900 font-medium transition">
               Masuk
             </Link>
             <Link
               to="/signup"
-              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="bg-linear-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Daftar Gratis
             </Link>
           </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-600 hover:text-gray-900 p-2"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="px-4 py-4 space-y-4">
+              <a
+                href="#features"
+                onClick={(e) => handleNavClick(e, "features")}
+                className="block text-gray-600 hover:text-gray-900 transition cursor-pointer py-2"
+              >
+                Fitur
+              </a>
+              <a
+                href="#benefits"
+                onClick={(e) => handleNavClick(e, "benefits")}
+                className="block text-gray-600 hover:text-gray-900 transition cursor-pointer py-2"
+              >
+                Manfaat
+              </a>
+              <a
+                href="#testimonials"
+                onClick={(e) => handleNavClick(e, "testimonials")}
+                className="block text-gray-600 hover:text-gray-900 transition cursor-pointer py-2"
+              >
+                Testimoni
+              </a>
+              <div className="border-t border-gray-200 pt-4 space-y-2">
+                <Link
+                  to="/login"
+                  className="block text-gray-600 hover:text-gray-900 font-medium transition py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Masuk
+                </Link>
+                <Link
+                  to="/signup"
+                  className="block bg-linear-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-lg font-semibold text-center hover:from-green-700 hover:to-emerald-700 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Daftar Gratis
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -166,7 +245,7 @@ const LandingPage = () => {
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Temukan Talenta Terbaik,
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-green-600 to-emerald-600">
                   {" "}
                   Wujudkan Visi
                 </span>
@@ -181,7 +260,7 @@ const LandingPage = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 to="/signup"
-                className="inline-flex items-center justify-center bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-green-700 hover:to-emerald-700 transition-all shadow-2xl shadow-green-500/50 transform hover:-translate-y-1"
+                className="inline-flex items-center justify-center bg-linear-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-green-700 hover:to-emerald-700 transition-all shadow-2xl shadow-green-500/50 transform hover:-translate-y-1"
               >
                 Mulai Sekarang Gratis
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -208,8 +287,8 @@ const LandingPage = () => {
           {/* Right Visual */}
           <div className="relative">
             <div className="relative h-96 lg:h-full">
-              <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-blue-400/20 rounded-3xl blur-3xl"></div>
-              <div className="relative bg-gradient-to-br from-green-600 via-emerald-600 to-teal-700 rounded-3xl p-8 text-white shadow-2xl">
+              <div className="absolute inset-0 bg-linear-to-r from-green-400/20 to-blue-400/20 rounded-3xl blur-3xl"></div>
+              <div className="relative bg-linear-to-br from-green-600 via-emerald-600 to-teal-700 rounded-3xl p-8 text-white shadow-2xl">
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3">
                     <div className="h-12 w-12 bg-white/20 rounded-full flex items-center justify-center">
@@ -300,7 +379,7 @@ const LandingPage = () => {
                 key={idx}
                 className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all border border-gray-200"
               >
-                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600 mb-4">
+                <div className="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-green-600 to-emerald-600 mb-4">
                   {benefit.number}
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">{benefit.title}</h3>
