@@ -54,7 +54,7 @@ export const useAuthStore = create((set) => ({
     toast.success("Logout berhasil!");
   },
 
-  checkAuth: async (navigate, isInitialCheck = false) => {
+  checkAuth: async (navigate) => {
     set({ isCheckingAuth: true });
     try {
       const token = localStorage.getItem("token");
@@ -78,13 +78,15 @@ export const useAuthStore = create((set) => ({
       const user = res.data.user;
       set({ authUser: res.data.user });
 
-      // Only navigate on initial check (login), not on page refresh
-      if (isInitialCheck && navigate && user?.role && user.role !== "" && user.role !== null) {
-        if (user.isProfileComplete) {
-          navigate(`/${user.role}/dashboard`);
-        } else {
+      // Only navigate if user role is not set or profile is incomplete
+      if (user?.role && user.role !== "" && user.role !== null) {
+        if (!user.isProfileComplete) {
           navigate(`/${user.role}/onboarding`);
         }
+        // If role is set and profile is complete, don't navigate - stay on current page
+      } else {
+        // Only navigate to role selection if no role set
+        navigate("/select-role");
       }
     } catch (error) {
       console.error("Auth check error:", error);

@@ -1,18 +1,10 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { Loader } from "lucide-react";
-import { useEffect } from "react";
 
 const ProtectedRoute = () => {
-  const { authUser, isCheckingAuth, checkAuth } = useAuthStore();
+  const { authUser, isCheckingAuth } = useAuthStore();
   const location = useLocation();
-
-  useEffect(() => {
-    // Check auth on mount/refresh without navigation
-    if (!authUser && !isCheckingAuth) {
-      checkAuth(null, false); // false = don't navigate, just verify token
-    }
-  }, []); // Only run once on mount
 
   if (isCheckingAuth) {
     return (
