@@ -120,8 +120,6 @@ const FreelancerOnboardingPage = () => {
         experience: formData.experience.filter((exp) => exp.title.trim()),
       };
 
-      console.log("Submitting freelancer profile:", cleanData);
-
       await updateFreelancerProfile(cleanData);
 
       navigate("/freelancer/dashboard");

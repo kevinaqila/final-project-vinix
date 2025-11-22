@@ -282,28 +282,12 @@ export const uploadOrderFiles = async (req, res) => {
     const userId = req.user._id;
     const files = req.files;
 
-    console.log("Upload order files request:", {
-      orderId: id,
-      userId,
-      filesCount: files ? files.length : 0,
-      files: files
-        ? files.map((f) => ({
-            originalname: f.originalname,
-            filename: f.filename,
-            path: f.path,
-            url: f.path || f.url,
-          }))
-        : [],
-    });
-
     if (!files || files.length === 0) {
-      console.log("No files uploaded");
       return res.status(400).json({ message: "No files uploaded" });
     }
 
     const order = await Order.findById(id);
     if (!order) {
-      console.log("Order not found:", id);
       return res.status(404).json({ message: "Order not found" });
     }
 
@@ -315,7 +299,6 @@ export const uploadOrderFiles = async (req, res) => {
     });
 
     if (order.clientId.toString() !== userId.toString() && order.freelancerId.toString() !== userId.toString()) {
-      console.log("Unauthorized access attempt");
       return res.status(403).json({ message: "Unauthorized" });
     }
 
@@ -327,21 +310,17 @@ export const uploadOrderFiles = async (req, res) => {
 
     if (order.clientId.toString() === userId.toString()) {
       order.clientFiles.push(...uploadedFiles);
-      console.log("Added files to clientFiles");
     } else {
       order.freelancerFiles.push(...uploadedFiles);
-      console.log("Added files to freelancerFiles");
     }
 
     await order.save();
-    console.log("Order saved successfully");
 
     const populatedOrder = await Order.findById(id)
       .populate("clientId", "fullName email profileImage")
       .populate("freelancerId", "fullName email profileImage")
       .populate("serviceId", "title category packages");
 
-    console.log("Upload completed successfully");
     res.status(200).json({
       message: "Files uploaded successfully",
       files: uploadedFiles,
