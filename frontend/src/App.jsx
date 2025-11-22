@@ -41,18 +41,6 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run once on mount
 
-  // Detect page refresh
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      sessionStorage.setItem('pageRefreshed', 'true');
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
-
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);

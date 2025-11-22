@@ -55,12 +55,10 @@ export const useAuthStore = create((set) => ({
   },
 
   checkAuth: async (navigate) => {
-    console.log('🔍 checkAuth called, current location:', window.location.pathname);
     set({ isCheckingAuth: true });
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        console.log('❌ No token found');
         set({ authUser: null, isCheckingAuth: false });
         return;
       }
@@ -78,29 +76,15 @@ export const useAuthStore = create((set) => ({
       });
 
       const user = res.data.user;
-      console.log('✅ Auth successful, user:', user);
       set({ authUser: res.data.user });
 
-      // Check if this is a page refresh (not initial load)
-      const isPageRefresh = sessionStorage.getItem('pageRefreshed') === 'true';
-      sessionStorage.setItem('pageRefreshed', 'false'); // Reset for next refresh
-
-      // Only navigate if user role is not set or profile is incomplete
       if (user?.role && user.role !== "" && user.role !== null) {
-        if (!user.isProfileComplete) {
-          console.log('📝 Profile incomplete, navigating to onboarding');
-          navigate(`/${user.role}/onboarding`);
-        } else if (!isPageRefresh) {
-          // Only navigate to dashboard on initial login, not on page refresh
-          console.log('🏠 Initial login, navigating to dashboard');
+        if (user.isProfileComplete) {
           navigate(`/${user.role}/dashboard`);
         } else {
-          console.log('🔄 Page refresh, staying on current page');
-          // On page refresh, don't navigate - stay on current page
+          navigate(`/${user.role}/onboarding`);
         }
       } else {
-        console.log('🎭 No role set, navigating to role selection');
-        // Only navigate to role selection if no role set
         navigate("/select-role");
       }
     } catch (error) {

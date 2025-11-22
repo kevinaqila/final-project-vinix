@@ -107,7 +107,7 @@ export const requestWithdrawal = async (req, res) => {
       accountName,
       status: "pending",
       adminFee: ADMIN_FEE,
-      autoCompleteAt: new Date(Date.now() + 5 * 60 * 1000), // 5 menit dari sekarang (untuk testing)
+      autoCompleteAt: new Date(Date.now() + 2 * 60 * 1000), // 2 menit dari sekarang (sinkron dengan cron)
     });
 
     await withdrawal.save();

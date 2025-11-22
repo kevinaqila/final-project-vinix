@@ -43,6 +43,12 @@ const WalletPage = () => {
 
   useEffect(() => {
     loadWalletData();
+    // Auto-refresh setiap 30 detik untuk update status withdrawal
+    const interval = setInterval(() => {
+      loadWalletData();
+    }, 30000); // 30 seconds
+
+    return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -376,7 +382,7 @@ const WalletPage = () => {
                   </button>
 
                   <p className="text-xs text-green-600 text-center font-medium">
-                    Dana akan diproses dalam waktu kurang dari 5 menit
+                    Dana akan diproses dalam waktu kurang dari 2 menit
                   </p>
                 </form>
               </div>
@@ -403,7 +409,7 @@ const WalletPage = () => {
                     <span className="text-blue-600 font-bold mt-1">✓</span>
                     <div>
                       <p className="font-semibold text-gray-900">Auto-Complete</p>
-                      <p className="text-sm text-gray-600">Penarikan otomatis selesai dalam 5 menit (testing)</p>
+                      <p className="text-sm text-gray-600">Penarikan otomatis selesai dalam 2 menit (testing)</p>
                     </div>
                   </div>
 
@@ -411,7 +417,7 @@ const WalletPage = () => {
                     <span className="text-blue-600 font-bold mt-1">✓</span>
                     <div>
                       <p className="font-semibold text-gray-900">Waktu Proses</p>
-                      <p className="text-sm text-gray-600">Auto-complete dalam 5 menit, atau manual 1-3 hari</p>
+                      <p className="text-sm text-gray-600">Auto-complete dalam 2 menit, atau manual 1-3 hari</p>
                     </div>
                   </div>
 
@@ -432,7 +438,7 @@ const WalletPage = () => {
                     Biaya admin Rp 7.000 akan langsung dipotong dari saldo Anda saat mengajukan penarikan.
                   </p>
                   <p className="text-sm text-yellow-800">
-                    Penarikan akan otomatis selesai dalam 5 menit tanpa perlu persetujuan manual.
+                    Penarikan akan otomatis selesai dalam 2 menit tanpa perlu persetujuan manual.
                   </p>
                 </div>
 
