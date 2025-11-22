@@ -16,7 +16,10 @@ const LoginPage = () => {
 
   useEffect(() => {
     // Only redirect if user is already authenticated and on login page
-    if (authUser && (location.pathname === "/login" || location.pathname === "/signup")) {
+    // But don't redirect on page refresh - let checkAuth handle it
+    const isPageRefresh = sessionStorage.getItem('pageRefreshed') === 'true';
+
+    if (authUser && (location.pathname === "/login" || location.pathname === "/signup") && !isPageRefresh) {
       const userRole = authUser.role;
       if (userRole && userRole !== "" && userRole !== null) {
         if (authUser.isProfileComplete) {

@@ -81,14 +81,22 @@ export const useAuthStore = create((set) => ({
       console.log('✅ Auth successful, user:', user);
       set({ authUser: res.data.user });
 
+      // Check if this is a page refresh (not initial load)
+      const isPageRefresh = sessionStorage.getItem('pageRefreshed') === 'true';
+      sessionStorage.setItem('pageRefreshed', 'false'); // Reset for next refresh
+
       // Only navigate if user role is not set or profile is incomplete
       if (user?.role && user.role !== "" && user.role !== null) {
         if (!user.isProfileComplete) {
           console.log('📝 Profile incomplete, navigating to onboarding');
           navigate(`/${user.role}/onboarding`);
+        } else if (!isPageRefresh) {
+          // Only navigate to dashboard on initial login, not on page refresh
+          console.log('🏠 Initial login, navigating to dashboard');
+          navigate(`/${user.role}/dashboard`);
         } else {
-          console.log('✅ Profile complete, staying on current page');
-          // If role is set and profile is complete, don't navigate - stay on current page
+          console.log('🔄 Page refresh, staying on current page');
+          // On page refresh, don't navigate - stay on current page
         }
       } else {
         console.log('🎭 No role set, navigating to role selection');
