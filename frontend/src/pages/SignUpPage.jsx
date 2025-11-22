@@ -19,7 +19,7 @@ const SignUpPage = () => {
 
   useEffect(() => {
     if (authUser) {
-      navigate("/");
+      navigate("/role-selection");
     }
   }, [authUser, navigate]);
 

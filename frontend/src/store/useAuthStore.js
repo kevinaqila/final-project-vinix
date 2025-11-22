@@ -85,7 +85,7 @@ export const useAuthStore = create((set) => ({
           navigate(`/${user.role}/onboarding`);
         }
       } else {
-        navigate("/select-role");
+        navigate("/role-selection");
       }
     } catch (error) {
       console.error("Auth check error:", error);

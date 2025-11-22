@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
 import {
   ArrowRight,
   CheckCircle2,
@@ -18,6 +19,36 @@ import {
 
 const LandingPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { authUser, isCheckingAuth } = useAuthStore();
+  const navigate = useNavigate();
+
+  // Redirect authenticated users to their dashboard
+  useEffect(() => {
+    if (authUser && !isCheckingAuth) {
+      const userRole = authUser.role;
+      if (userRole && userRole !== "" && userRole !== null) {
+        if (authUser.isProfileComplete) {
+          navigate(`/${userRole}/dashboard`, { replace: true });
+        } else {
+          navigate(`/${userRole}/onboarding`, { replace: true });
+        }
+      } else {
+        navigate("/role-selection", { replace: true });
+      }
+    }
+  }, [authUser, isCheckingAuth, navigate]);
+
+  // Show loading while checking authentication
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Memuat...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Smooth scroll function
   const smoothScrollTo = (targetId) => {
