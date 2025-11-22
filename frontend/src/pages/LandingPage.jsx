@@ -17,6 +17,24 @@ import {
 const LandingPage = () => {
   const [email, setEmail] = useState("");
 
+  // Smooth scroll function
+  const smoothScrollTo = (targetId) => {
+    const element = document.getElementById(targetId);
+    if (element) {
+      const offsetTop = element.offsetTop - 80; // Account for fixed navbar height
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Handle anchor link clicks
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    smoothScrollTo(targetId);
+  };
+
   const features = [
     {
       icon: Shield,
@@ -54,7 +72,12 @@ const LandingPage = () => {
     {
       number: "01",
       title: "Untuk Freelancer",
-      items: ["Dapatkan proyek berkualitas", "Pembayaran terjamin & tepat waktu", "Bangun portfolio profesional", "Tingkatkan penghasilan"],
+      items: [
+        "Dapatkan proyek berkualitas",
+        "Pembayaran terjamin & tepat waktu",
+        "Bangun portfolio profesional",
+        "Tingkatkan penghasilan",
+      ],
     },
     {
       number: "02",
@@ -100,7 +123,7 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="bg-white" style={{ scrollBehavior: 'smooth' }}>
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -108,21 +131,18 @@ const LandingPage = () => {
             <img src="/images/vertical-logo.png" alt="FinancePro" className="h-10" />
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-600 hover:text-gray-900 transition">
+            <a href="#features" onClick={(e) => handleNavClick(e, 'features')} className="text-gray-600 hover:text-gray-900 transition cursor-pointer">
               Fitur
             </a>
-            <a href="#benefits" className="text-gray-600 hover:text-gray-900 transition">
+            <a href="#benefits" onClick={(e) => handleNavClick(e, 'benefits')} className="text-gray-600 hover:text-gray-900 transition cursor-pointer">
               Manfaat
             </a>
-            <a href="#testimonials" className="text-gray-600 hover:text-gray-900 transition">
+            <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')} className="text-gray-600 hover:text-gray-900 transition cursor-pointer">
               Testimoni
             </a>
           </div>
           <div className="flex items-center space-x-4">
-            <Link
-              to="/login"
-              className="text-gray-600 hover:text-gray-900 font-medium transition"
-            >
+            <Link to="/login" className="text-gray-600 hover:text-gray-900 font-medium transition">
               Masuk
             </Link>
             <Link
@@ -152,7 +172,8 @@ const LandingPage = () => {
                 </span>
               </h1>
               <p className="text-xl text-gray-600 max-w-lg">
-                Platform freelancing terpercaya dengan sistem pembayaran aman, komunitas profesional, dan dukungan penuh untuk kesuksesan Anda.
+                Platform freelancing terpercaya dengan sistem pembayaran aman, komunitas profesional, dan dukungan penuh
+                untuk kesuksesan Anda.
               </p>
             </div>
 
@@ -237,9 +258,7 @@ const LandingPage = () => {
       <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Fitur Unggulan Kami
-            </h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Fitur Unggulan Kami</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Semua yang Anda butuhkan untuk sukses di satu platform
             </p>
@@ -269,9 +288,7 @@ const LandingPage = () => {
       <section id="benefits" className="py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-slate-50 to-green-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Manfaat untuk Semua
-            </h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Manfaat untuk Semua</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Baik Anda freelancer atau klien, kami punya solusinya
             </p>
@@ -305,9 +322,7 @@ const LandingPage = () => {
       <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Apa Kata Mereka?
-            </h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Apa Kata Mereka?</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Ribuan pengguna puas sudah membuktikan kualitas platform kami
             </p>
@@ -341,9 +356,7 @@ const LandingPage = () => {
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-green-600 via-emerald-600 to-teal-600">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            Siap Memulai Perjalanan Anda?
-          </h2>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">Siap Memulai Perjalanan Anda?</h2>
           <p className="text-xl text-green-50 mb-8 max-w-2xl mx-auto">
             Bergabunglah dengan ribuan freelancer dan klien yang telah merasakan manfaatnya
           </p>
@@ -377,25 +390,61 @@ const LandingPage = () => {
             <div>
               <h4 className="font-semibold text-white mb-4">Produk</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition">Untuk Freelancer</a></li>
-                <li><a href="#" className="hover:text-white transition">Untuk Klien</a></li>
-                <li><a href="#" className="hover:text-white transition">Harga</a></li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Untuk Freelancer
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Untuk Klien
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Harga
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-white mb-4">Perusahaan</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition">Tentang Kami</a></li>
-                <li><a href="#" className="hover:text-white transition">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition">Karir</a></li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Tentang Kami
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Karir
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-white mb-4">Legal</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition">Contact</a></li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Contact
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
