@@ -15,6 +15,7 @@ import {
   Wallet,
   Menu,
   X,
+  Loader,
 } from "lucide-react";
 
 const LandingPage = () => {
@@ -41,11 +42,8 @@ const LandingPage = () => {
   // Show loading while checking authentication
   if (isCheckingAuth) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Memuat...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <Loader className="h-8 w-8 animate-spin text-green-600" />
       </div>
     );
   }
